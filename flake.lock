@@ -1,0 +1,77 @@
+{
+  "nodes": {
+    "ng-cli": {
+      "locked": {
+        "lastModified": 1724541025,
+        "narHash": "sha256-imMiv9rkG8qY0iXa8KwJWLsuPNQORIWC8HhAaUlrgI4=",
+        "owner": "goulartdev",
+        "repo": "nixpkgs",
+        "rev": "a24d768ebc70dde02ad29f7a7e8cae3a8ed111f2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "goulartdev",
+        "ref": "angular-cli",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "ng-lsp": {
+      "locked": {
+        "lastModified": 1724540362,
+        "narHash": "sha256-bcBDLfWaaYciNUccFT5X1XbPsVHPZfHyg5tsz/1XSzw=",
+        "owner": "goulartdev",
+        "repo": "nixpkgs",
+        "rev": "4d21398e4e9cb1023871192e5775d21180eaea1b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "goulartdev",
+        "ref": "angular-language-server",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1724395761,
+        "narHash": "sha256-zRkDV/nbrnp3Y8oCADf5ETl1sDrdmAW6/bBVJ8EbIdQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ae815cee91b417be55d43781eb4b73ae1ecc396c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "ng-cli": "ng-cli",
+        "ng-lsp": "ng-lsp",
+        "nixpkgs": "nixpkgs",
+        "systems": "systems"
+      }
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

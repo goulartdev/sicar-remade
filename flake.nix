@@ -7,6 +7,7 @@
 
     ng-lsp.url = "github:goulartdev/nixpkgs/angular-language-server";
     ng-cli.url = "github:goulartdev/nixpkgs/angular-cli";
+    tippecanoe.url = "github:NixOS/nixpkgs/d8f342297254713a66cb0fa464ee86e3942e92ac";
   };
 
   outputs =
@@ -15,6 +16,7 @@
       systems,
       ng-lsp,
       ng-cli,
+      tippecanoe,
       ...
     }:
     let
@@ -25,22 +27,20 @@
         system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
-          angular-language-server = ng-lsp.legacyPackages.${system}.angular-language-server;
-          angular-cli = ng-cli.legacyPackages.${system}.angular-cli;
         in
         {
           default = pkgs.mkShell {
             packages =
               (with pkgs; [
                 gdal
-                tippecanoe
                 nodejs_22
                 vscode-langservers-extracted
                 minio
               ])
               ++ [
-                angular-language-server
-                angular-cli
+                ng-lsp.legacyPackages.${system}.angular-language-server
+                ng-cli.legacyPackages.${system}.angular-cli
+                tippecanoe.legacyPackages.${system}.tippecanoe
               ];
           };
         }

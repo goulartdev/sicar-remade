@@ -53,7 +53,8 @@
         "ng-cli": "ng-cli",
         "ng-lsp": "ng-lsp",
         "nixpkgs": "nixpkgs",
-        "systems": "systems"
+        "systems": "systems",
+        "tippecanoe": "tippecanoe"
       }
     },
     "systems": {
@@ -68,6 +69,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "tippecanoe": {
+      "locked": {
+        "lastModified": 1717815068,
+        "narHash": "sha256-CprqceMG9iG3/xuyn9psGzh/Z9ftw6ODChaQz8nt/kM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d8f342297254713a66cb0fa464ee86e3942e92ac",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d8f342297254713a66cb0fa464ee86e3942e92ac",
         "type": "github"
       }
     }

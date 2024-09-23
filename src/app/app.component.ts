@@ -1,19 +1,18 @@
-import { TuiRoot } from "@taiga-ui/core";
+import { TuiButton, TuiIcon, TuiRoot } from "@taiga-ui/core";
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
+import { ControlComponent, MapService } from "@maplibre/ngx-maplibre-gl";
 import { LngLatBoundsLike, StyleSpecification } from "maplibre-gl";
 
 import { MapComponent } from "./components/map/map.component";
-import { MapService } from "@maplibre/ngx-maplibre-gl";
 
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [RouterOutlet, TuiRoot, MapComponent],
+  imports: [RouterOutlet, TuiRoot, TuiIcon, TuiButton, ControlComponent, MapComponent],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
   changeDetection: ChangeDetectionStrategy.OnPush,
-
   providers: [MapService],
 })
 export class AppComponent {
@@ -41,4 +40,8 @@ export class AppComponent {
       },
     ],
   };
+
+  protected resetBounds() {
+    this.bounds = [...(this.bounds as number[])] as LngLatBoundsLike;
+  }
 }

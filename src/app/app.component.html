@@ -1,4 +1,10 @@
 <tui-root>
   <app-map [style]="style" [fitBounds]="bounds" [attributionControl]="false">
+    <mgl-control position="top-right">
+      <button tuiButton size="m" (click)="resetBounds()">
+        <tui-icon icon="@tui.expand" />
+      </button>
+    </mgl-control>
   </app-map>
+
 </tui-root>

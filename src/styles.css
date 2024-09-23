@@ -1,4 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+
 body {
   margin: 0;
+}
+
+.maplibregl-ctrl button:not(:disabled):hover {
+  background: var(--t-bg);
 }

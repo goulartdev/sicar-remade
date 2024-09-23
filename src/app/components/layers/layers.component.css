@@ -1,0 +1,11 @@
+:host {
+  display: block;
+  background-color: var(--tui-background-base);
+  padding: 16px;
+}
+
+.layers {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

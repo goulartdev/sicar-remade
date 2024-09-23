@@ -1,0 +1,43 @@
+:host {
+  background-color: var(--tui-background-base-alt);
+  padding: 4px 0 4px 4px;
+  border: 1px solid var(--tui-border-normal);
+  border-radius: var(--tui-radius-s);
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+
+  .download {
+    cursor: pointer;
+  }
+
+  .handle {
+    cursor: move;
+  }
+
+  label {
+    flex-grow: 1;
+    align-items: center;
+    margin-bottom: .125rem;
+  }
+
+  .placeholder {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.categories {
+  ul {
+    margin-left: 16px;
+    margin-top: 4px
+  }
+
+  label {
+    align-items: center;
+  }
+}

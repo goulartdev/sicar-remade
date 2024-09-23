@@ -1,10 +1,12 @@
 import { TuiButton, TuiIcon, TuiRoot } from "@taiga-ui/core";
 import { ChangeDetectionStrategy, Component } from "@angular/core";
+  tuiSlideInRight,
 import { RouterOutlet } from "@angular/router";
 import { ControlComponent, MapService } from "@maplibre/ngx-maplibre-gl";
 import { LngLatBoundsLike, StyleSpecification, addProtocol } from "maplibre-gl";
 import { Protocol } from "pmtiles";
 
+import { LayersComponent } from "./components/layers/layers.component";
 import { MapComponent } from "./components/map/map.component";
 
 let protocol = new Protocol();
@@ -13,11 +15,22 @@ addProtocol("pmtiles", protocol.tile);
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [RouterOutlet, TuiRoot, TuiIcon, TuiButton, ControlComponent, MapComponent],
+  imports: [
+    RouterOutlet,
+    TuiRoot,
+    TuiIcon,
+    TuiButton,
+    ControlComponent,
+    MapComponent,
+    LayersComponent,
+  ],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [MapService],
+  providers: [
+    MapService,
+  ],
+  animations: [tuiSlideInRight],
 })
 export class AppComponent {
   protected layersVisible = false;
@@ -75,6 +88,19 @@ export class AppComponent {
           "fill-outline-color": "#000000",
           "fill-opacity": 0.5,
         },
+        metadata: {
+          legend: {
+            label: "Imóveis",
+            filterAttribute: "ind_status",
+            expanded: true,
+            categories: [
+              { value: "AT", label: "Ativo", color: "#4567ff" },
+              { value: "PE", label: "Pendente", color: "#ffc533" },
+              { value: "SU", label: "Suspenso", color: "#e0351b" },
+              { value: "CA", label: "Cancelado", color: "#7d7d7d" },
+            ],
+          },
+        },
       },
       {
         id: "administrative",
@@ -87,6 +113,12 @@ export class AppComponent {
         paint: {
           "line-color": "#d3650a",
           "line-width": ["step", ["zoom"], 1, 5, 2],
+        },
+        metadata: {
+          legend: {
+            label: "Limites Administrativos",
+            color: "#d3650a",
+          },
         },
       },
     ],

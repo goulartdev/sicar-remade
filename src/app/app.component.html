@@ -1,10 +1,18 @@
 <tui-root>
   <app-map [style]="style" [fitBounds]="bounds" [attributionControl]="false">
     <mgl-control position="top-right">
+      <button tuiButton size="m" (click)="layersVisible = !layersVisible">
+        <tui-icon icon="@tui.layers-3" />
+      </button>
+    </mgl-control>
+    <mgl-control position="top-right">
       <button tuiButton size="m" (click)="resetBounds()">
         <tui-icon icon="@tui.expand" />
       </button>
     </mgl-control>
   </app-map>
 
+  @if (layersVisible) {
+  <app-layers [@tuiSlideInRight]="{value: '', params: { duration: 200}}"></app-layers>
+  }
 </tui-root>

@@ -1,0 +1,5 @@
+<div class="layers">
+  @for (layer of layers | async; track layer) {
+  <app-layer-control [layerId]="layer" />
+  }
+</div>

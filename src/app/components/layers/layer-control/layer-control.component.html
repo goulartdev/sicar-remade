@@ -1,0 +1,26 @@
+<div class="title">
+  @if (hasCategories) {
+  <tui-icon class="expand" [tuiChevron]="expanded" (click)="toggleExpanded()"></tui-icon>
+  } @else {
+  <div class="placeholder"></div>
+  }
+  <label tuiLabel>
+    <input tuiCheckbox type="checkbox" size="s" style="--t-bg: {{legend.color ?? '#666'}}" [(ngModel)]="visible">
+    <span tuiTitle>{{legend.label}}</span>
+  </label>
+  <tui-icon class="download" icon="@tui.download"></tui-icon>
+  <tui-icon class="handle" icon="@tui.grip-vertical"></tui-icon>
+</div>
+<tui-expand class="categories" [expanded]="expanded">
+  <ul>
+    @for (category of categories; track category.value) {
+    <li>
+      <label tuiLabel>
+        <input tuiCheckbox type="checkbox" size="s" style="--t-bg: {{category.color}}"
+          [ngModel]="category.visible ?? true" (ngModelChange)="filterCategory(category, $event)">
+        <span tuiTitle>{{category.label}}</span>
+      </label>
+    </li>
+    }
+  </ul>
+</tui-expand>

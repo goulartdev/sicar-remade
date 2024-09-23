@@ -1,4 +1,4 @@
-<tui-root>
+<tui-root [attr.tuiTheme]="darkMode() ? 'dark' : null">
   <app-map [style]="style" [fitBounds]="bounds" [attributionControl]="false">
     <mgl-control position="top-right">
       <button tuiButton size="m" (click)="layersVisible = !layersVisible">
@@ -8,6 +8,11 @@
     <mgl-control position="top-right">
       <button tuiButton size="m" (click)="resetBounds()">
         <tui-icon icon="@tui.expand" />
+      </button>
+    </mgl-control>
+    <mgl-control position="top-right">
+      <button tuiButton size="m" (click)="darkMode.set(!darkMode())">
+        <tui-icon [icon]="darkMode() ? '@tui.sun' : '@tui.moon'" />
       </button>
     </mgl-control>
   </app-map>

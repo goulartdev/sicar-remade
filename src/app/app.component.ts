@@ -1,6 +1,12 @@
-import { TuiButton, TuiIcon, TuiRoot } from "@taiga-ui/core";
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import {
+  TUI_DARK_MODE,
+  TUI_ICON_RESOLVER,
+  TuiButton,
+  TuiIcon,
+  TuiRoot,
   tuiSlideInRight,
+} from "@taiga-ui/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { ControlComponent, MapService } from "@maplibre/ngx-maplibre-gl";
 import { LngLatBoundsLike, StyleSpecification, addProtocol } from "maplibre-gl";
@@ -123,6 +129,8 @@ export class AppComponent {
       },
     ],
   };
+
+  protected readonly darkMode = inject(TUI_DARK_MODE);
 
   protected resetBounds() {
     this.bounds = [...(this.bounds as number[])] as LngLatBoundsLike;

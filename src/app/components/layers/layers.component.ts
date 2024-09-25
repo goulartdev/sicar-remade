@@ -8,7 +8,6 @@ import {
   CdkDragPlaceholder,
   moveItemInArray,
 } from "@angular/cdk/drag-drop";
-import { TUI_DARK_MODE } from "@taiga-ui/core";
 
 import { LayerControlComponent } from "./layer-control/layer-control.component";
 
@@ -22,8 +21,6 @@ import { LayerControlComponent } from "./layer-control/layer-control.component";
 })
 export class LayersComponent {
   private readonly mapService = inject(MapService);
-
-  protected readonly darkMode = inject(TUI_DARK_MODE);
 
   private get map() {
     return this.mapService.mapInstance;

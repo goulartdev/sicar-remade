@@ -1,5 +1,8 @@
-<div class="layers">
-  @for (layer of layers | async; track layer) {
-  <app-layer-control [layerId]="layer" />
+<div class="layers" cdkDropList (cdkDropListDropped)="moveLayer($event)">
+  @for (layer of layers; track layer) {
+  <div class="drag-container" cdkDrag [cdkDragData]="layer">
+    <div class="drag-placeholder" *cdkDragPlaceholder></div>
+    <app-layer-control [layerId]="layer" />
+  </div>
   }
 </div>

@@ -91,7 +91,6 @@ export class LayerControlComponent {
 
   protected set expanded(expanded: boolean) {
     this.legend.expanded = expanded;
-    console.log(this.legend);
   }
 
   protected toggleExpanded() {

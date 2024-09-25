@@ -6,7 +6,13 @@ import {
   TuiRoot,
   tuiSlideInRight,
 } from "@taiga-ui/core";
-import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+  Renderer2,
+} from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { ControlComponent, MapService } from "@maplibre/ngx-maplibre-gl";
 import { LngLatBoundsLike, StyleSpecification, addProtocol } from "maplibre-gl";
@@ -14,6 +20,7 @@ import { Protocol } from "pmtiles";
 
 import { LayersComponent } from "./components/layers/layers.component";
 import { MapComponent } from "./components/map/map.component";
+import { DOCUMENT } from "@angular/common";
 
 let protocol = new Protocol();
 addProtocol("pmtiles", protocol.tile);
@@ -38,7 +45,10 @@ addProtocol("pmtiles", protocol.tile);
   ],
   animations: [tuiSlideInRight],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  private readonly document = inject(DOCUMENT);
+  private readonly renderer = inject(Renderer2);
+
   protected layersVisible = false;
   protected bounds: LngLatBoundsLike = [-33.437108, 6.672897, -74.404622, -34.796086];
   protected readonly style: StyleSpecification = {
@@ -132,7 +142,21 @@ export class AppComponent {
 
   protected readonly darkMode = inject(TUI_DARK_MODE);
 
+  public ngOnInit() {
+    this.setDarkMode(this.darkMode());
+  }
+
   protected resetBounds() {
     this.bounds = [...(this.bounds as number[])] as LngLatBoundsLike;
+  }
+
+  protected setDarkMode(darkMode: boolean) {
+    this.darkMode.set(darkMode);
+
+    if (darkMode) {
+      this.renderer.setAttribute(this.document.body, "tuiTheme", "dark");
+    } else {
+      this.renderer.removeAttribute(this.document.body, "tuiTheme");
+    }
   }
 }

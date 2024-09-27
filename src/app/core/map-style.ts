@@ -55,7 +55,12 @@ const style: StyleSpecification = {
           "#000000",
         ],
         "fill-outline-color": "#000000",
-        "fill-opacity": 0.5,
+        "fill-opacity": [
+          "case",
+          ["boolean", ["feature-state", "hover"], false],
+          0.85,
+          0.5,
+        ],
       },
       metadata: {
         legend: {
@@ -69,6 +74,7 @@ const style: StyleSpecification = {
             { value: "CA", label: "Cancelado", color: "#7d7d7d" },
           ],
         },
+        enableHoverStyle: true,
       },
     },
     {

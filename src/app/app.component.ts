@@ -16,14 +16,11 @@ import {
 import { DOCUMENT } from "@angular/common";
 import { RouterOutlet } from "@angular/router";
 import { ControlComponent, MapService } from "@maplibre/ngx-maplibre-gl";
-import { LngLatBoundsLike, addProtocol } from "maplibre-gl";
+import { LngLatBoundsLike, MapGeoJSONFeature } from "maplibre-gl";
 
 import mapStyle from "./core/map-style";
 import { LayersComponent } from "./components/layers/layers.component";
 import { MapComponent } from "./components/map/map.component";
-
-let protocol = new Protocol();
-addProtocol("pmtiles", protocol.tile);
 
 @Component({
   selector: "app-root",
@@ -46,6 +43,7 @@ addProtocol("pmtiles", protocol.tile);
   animations: [tuiSlideInRight],
 })
 export class AppComponent implements OnInit {
+  private mapService = inject(MapService);
   private readonly document = inject(DOCUMENT);
   private readonly renderer = inject(Renderer2);
 
@@ -57,6 +55,10 @@ export class AppComponent implements OnInit {
 
   public ngOnInit() {
     this.setDarkMode(this.darkMode());
+
+    this.mapService.mapLoaded$.subscribe({
+      next: () => this.setupOnHoverEffects(),
+    });
   }
 
   protected resetBounds() {
@@ -71,5 +73,49 @@ export class AppComponent implements OnInit {
     } else {
       this.renderer.removeAttribute(this.document.body, "tuiTheme");
     }
+  }
+
+  /*
+   * Hover style
+   */
+
+  private setupOnHoverEffects() {
+    const map = this.mapService.mapInstance;
+    map
+      .getLayersOrder()
+      .map((layerId) => map.getLayer(layerId)!)
+      .filter(
+        (layer) =>
+          layer && ((layer.metadata ?? {}) as Record<string, any>)["enableHoverStyle"],
+      )
+      .forEach((layer) => {
+        let hoveredFeature: MapGeoJSONFeature | null = null;
+
+        map.on("mousemove", layer.id, (e) => {
+          const feature = e.features?.[0] ?? null;
+
+          if (feature == hoveredFeature) {
+            return;
+          }
+
+          if (hoveredFeature) {
+            map.setFeatureState(hoveredFeature, { hover: false });
+          }
+
+          if (feature) {
+            map.setFeatureState(feature, { hover: true });
+          }
+
+          hoveredFeature = feature;
+        });
+
+        map.on("mouseleave", layer.id, () => {
+          if (hoveredFeature) {
+            map.setFeatureState(hoveredFeature, { hover: false });
+          }
+
+          hoveredFeature = null;
+        });
+      });
   }
 }

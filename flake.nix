@@ -36,6 +36,7 @@
                 nodejs_22
                 vscode-langservers-extracted
                 minio
+                duckdb
               ])
               ++ [
                 ng-lsp.legacyPackages.${system}.angular-language-server

@@ -1,0 +1,5 @@
+:host {
+  display: block;
+  background-color: var(--tui-background-base);
+  border-radius: var(--tui-radius-m);
+}

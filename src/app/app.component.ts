@@ -13,14 +13,14 @@ import {
   OnInit,
   Renderer2,
 } from "@angular/core";
-import { DOCUMENT } from "@angular/common";
+import { AsyncPipe, DOCUMENT } from "@angular/common";
 import { RouterOutlet } from "@angular/router";
 import { ControlComponent, MapService } from "@maplibre/ngx-maplibre-gl";
 import { LngLatBoundsLike, MapGeoJSONFeature } from "maplibre-gl";
 
 import mapStyle from "./core/map-style";
-import { LayersComponent } from "./components/layers/layers.component";
-import { MapComponent } from "./components/map/map.component";
+import { MapComponent, LayersComponent, SearchInputComponent } from "./components";
+import { CARService } from "./services";
 
 @Component({
   selector: "app-root",
@@ -33,13 +33,12 @@ import { MapComponent } from "./components/map/map.component";
     ControlComponent,
     MapComponent,
     LayersComponent,
+    SearchInputComponent,
   ],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    MapService,
-  ],
+  providers: [MapService, CARService],
   animations: [tuiSlideInRight],
 })
 export class AppComponent implements OnInit {
@@ -48,7 +47,7 @@ export class AppComponent implements OnInit {
   private readonly renderer = inject(Renderer2);
 
   protected readonly darkMode = inject(TUI_DARK_MODE);
-  protected readonly style = mapStyle;
+  protected readonly mapStyle = mapStyle;
 
   protected layersVisible = false;
   protected bounds: LngLatBoundsLike = [-33.437108, 6.672897, -74.404622, -34.796086];

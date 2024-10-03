@@ -1,0 +1,12 @@
+<form (ngSubmit)="search()">
+  <tui-textfield #searchInput tuiTextfieldSize="m">
+    <input id="search-input" tuiTextfield type="text" [formControl]="input"
+      [placeholder]="searchInput.focused() ? '' : 'Número do CAR'" [invalid]="input.invalid">
+
+    @if (isSearching()) {
+    <tui-loader />
+    } @else {
+    <button tuiIconButton appearance="icon" size="xs" type="button" iconStart="@tui.search" (click)="search()"></button>
+    }
+  </tui-textfield>
+</form>

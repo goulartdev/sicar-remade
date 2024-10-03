@@ -12,6 +12,7 @@
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
     "isolatedModules": true,
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,

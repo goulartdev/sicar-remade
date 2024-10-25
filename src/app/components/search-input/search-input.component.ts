@@ -67,7 +67,12 @@ export class SearchInputComponent implements OnInit, OnDestroy {
   }
 
   protected search() {
+    if (this.isSearching() === true) {
+      return;
+    }
+
     this.cancelRequest$$.next(null);
+    this.CARService.selectCAR(null);
     const value = this.input.value;
 
     if (!isCARNumber(value)) {
@@ -84,37 +89,16 @@ export class SearchInputComponent implements OnInit, OnDestroy {
       });
   }
 
-  private handleSearchError(err: unknown) {}
+  private handleSearchError(err: unknown) {
+    // TODO: implement
+  }
+
+  public clear() {
+    this.input.setValue("");
+    this.CARService.clearSelectedCAR();
+  }
 
   public ngOnDestroy(): void {
     this.cancelRequest$$.next(null);
   }
-
-  //protected results: Observable<SearchItemResult[]> = this.text.valueChanges.pipe(
-  //  tap((value) => console.log(value)),
-  //  debounceTime(500),
-  //  map((value) => value.trim()),
-  //  distinctUntilChanged(),
-  //  filter((value) => value.length >= 3),
-  //  switchMap((value) => this.search(value)),
-  //  startWith([]),
-  //);
-
-  //private search(text: string): Observable<SearchItemResult[]> {
-  //  return isCARNumber(text) ? this.handleCAR(text) : this.handleCity(text);
-  //}
-  //
-  //private handleCAR(code: CARCode): Observable<SearchItemResult[]> {
-  //  return of([]);
-  //}
-  //
-  //private handleCity(name: string): Observable<SearchItemResult[]> {
-  //  return this.searchService
-  //    .searchCity(name)
-  //    .pipe(map(({ results }) => results.map((city) => ({ label: city.name }))));
-  //}
-  //
-  //public stringfy(item: SearchItemResult) {
-  //  return item.label;
-  //}
 }

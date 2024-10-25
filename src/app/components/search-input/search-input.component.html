@@ -1,5 +1,5 @@
 <form (ngSubmit)="search()">
-  <tui-textfield #searchInput tuiTextfieldSize="m">
+  <tui-textfield #searchInput tuiTextfieldSize="m" [tuiTextfieldCleaner]="false">
     <input id="search-input" tuiTextfield type="text" [formControl]="input"
       [placeholder]="searchInput.focused() ? '' : 'Número do CAR'" [invalid]="input.invalid">
 
@@ -8,5 +8,6 @@
     } @else {
     <button tuiIconButton appearance="icon" size="xs" type="button" iconStart="@tui.search" (click)="search()"></button>
     }
+    <button tuiIconButton appearance="icon" size="xs" type="button" iconStart="@tui.x" (click)="clear()"></button>
   </tui-textfield>
 </form>

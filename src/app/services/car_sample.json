@@ -1,24 +1,46 @@
 {
   "type": "FeatureCollection",
   "name": "car_sample",
-  "bbox": [-58.0769850849437, -29.8560867447573, -51.078300690985, -10.3081891751683],
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "recibo": "RS-4312906-4E4AA8A24EEA4CA486C240BB41537F7D",
-        "modfiscais": 0.91,
-        "tema": "Área do Imovel",
+        "cod_imovel": "RS-4312906-4E4AA8A24EEA4CA486C240BB41537F7D",
+        "mod_fiscal": 0.91,
+        "status": "AT",
+        "tipo": "IRU",
+        "condicao": "Aguardando Análise",
         "area": 18.1998,
         "municipio": "Nova Bassano",
-        "estado": "Rio Grande do Sul"
+        "UF": "RS",
+        "centroide": {
+          "type": "Point",
+          "coordinates": [-51.7800731068313, -28.7239200636878]
+        },
+        "data_inscricao": "2014-05-12T00:00:00.000Z",
+        "data_retificacao": "2014-05-12T00:00:00.000Z",
+        "veg_nat_remanescente": 0,
+        "area_rural_consolidada": 0,
+        "area_servidao_admin": 0,
+        "rl_situacao": "Não Analisada",
+        "rl_averbada": 0,
+        "rl_aprovada_nao_averbada": 0,
+        "rl_proposta": 3.6473,
+        "rl_passivo_excedente": 0.0052,
+        "rl_a_recompor": 3.6451737091375196,
+        "app_total": 0,
+        "app_area_consolidada": 0,
+        "app_remanescente_veg_nat": 0,
+        "app_a_recompor": 0,
+        "area_uso_restrito": 0,
+        "uso_restrito_a_recompor": 0
       },
       "bbox": [
         -51.780989170074456, -28.728942320527622, -51.779186725616455,
         -28.718912747701683
       ],
       "geometry": {
-        "type": "Polygon",
+        "type": "MultiPolygon",
         "coordinates": [
           [
             [
@@ -39,19 +61,42 @@
     {
       "type": "Feature",
       "properties": {
-        "recibo": "MT-5106158-00574C981FE04CD7881BB242AB16513B",
-        "modfiscais": 1.0205,
-        "tema": "Área do Imovel",
+        "cod_imovel": "MT-5106158-00574C981FE04CD7881BB242AB16513B",
+        "mod_fiscal": 1.0205,
+        "status": "AT",
+        "tipo": "IRU",
+        "condicao": "Aguardando Análise",
         "area": 102.0541,
         "municipio": "Nova Bandeirantes",
-        "estado": "Mato Grosso"
+        "UF": "MT",
+        "centroide": {
+          "type": "Point",
+          "coordinates": [-58.073130531349, -10.3185030834255]
+        },
+        "data_inscricao": "2015-06-22T00:00:00.000Z",
+        "data_retificacao": "2015-06-22T00:00:00.000Z",
+        "veg_nat_remanescente": 43.425642260533785,
+        "area_rural_consolidada": 54.54917611146288,
+        "area_servidao_admin": 0.3522809989933623,
+        "rl_situacao": "Não Analisada",
+        "rl_averbada": 0,
+        "rl_aprovada_nao_averbada": 0,
+        "rl_proposta": 43.4256,
+        "rl_passivo_excedente": -37.9162,
+        "rl_a_recompor": 0,
+        "app_total": 20.3328142940755,
+        "app_area_consolidada": 7.0695,
+        "app_remanescente_veg_nat": 13.2041,
+        "app_a_recompor": 2.0213,
+        "area_uso_restrito": 0,
+        "uso_restrito_a_recompor": 0
       },
       "bbox": [
         -58.076985084943708, -10.327841805218258, -58.068624936180015,
         -10.308189175168303
       ],
       "geometry": {
-        "type": "Polygon",
+        "type": "MultiPolygon",
         "coordinates": [
           [
             [
@@ -69,19 +114,42 @@
     {
       "type": "Feature",
       "properties": {
-        "recibo": "RS-4314035-2A38D3E957164C91B27FE462C3710A42",
-        "modfiscais": 0.1655,
-        "tema": "Área do Imovel",
+        "cod_imovel": "RS-4314035-2A38D3E957164C91B27FE462C3710A42",
+        "mod_fiscal": 0.1655,
+        "status": "AT",
+        "tipo": "IRU",
+        "condicao": "Aguardando Análise",
         "area": 2.9792,
         "municipio": "Pareci Novo",
-        "estado": "Rio Grande do Sul"
+        "UF": "RS",
+        "centroide": {
+          "type": "Point",
+          "coordinates": [-51.7800731068313, -28.7239200636878]
+        },
+        "data_inscricao": "2014-05-13T00:00:00.000Z",
+        "data_retificacao": "2014-05-13T00:00:00.000Z",
+        "veg_nat_remanescente": 0,
+        "area_rural_consolidada": 0,
+        "area_servidao_admin": 0,
+        "rl_situacao": "Não Analisada",
+        "rl_averbada": 0,
+        "rl_aprovada_nao_averbada": 0,
+        "rl_proposta": 3.6473,
+        "app_total": 0,
+        "app_area_consolidada": 0,
+        "app_remanescente_veg_nat": 0,
+        "area_uso_restrito": 0,
+        "rl_passivo_excedente": 0.0052,
+        "rl_a_recompor": 3.6451737091375196,
+        "app_a_recompor": 0,
+        "uso_restrito_a_recompor": 0
       },
       "bbox": [
         -51.414620876312256, -29.643546771832444, -51.411831378936768,
         -29.641215585316012
       ],
       "geometry": {
-        "type": "Polygon",
+        "type": "MultiPolygon",
         "coordinates": [
           [
             [
@@ -99,19 +167,43 @@
     {
       "type": "Feature",
       "properties": {
-        "recibo": "MT-5108857-1AAF277136B8413A86066940240A50BE",
-        "modfiscais": 0.8003,
-        "tema": "Área do Imovel",
+        "cod_imovel": "MT-5108857-1AAF277136B8413A86066940240A50BE",
+        "mod_fiscal": 0.8003,
+        "status": "AT",
+        "tipo": "IRU",
+        "condicao": "Aguardando Análise",
         "area": 64.021,
         "municipio": "Nova Marilândia",
-        "estado": "Mato Grosso"
+        "UF": "MT",
+
+        "centroide": {
+          "type": "Point",
+          "coordinates": [-57.3654090546589, -14.3157939144452]
+        },
+        "data_inscricao": "2015-07-19T00:00:00.000Z",
+        "data_retificacao": "2015-07-19T00:00:00.000Z",
+        "veg_nat_remanescente": 0,
+        "area_rural_consolidada": 0,
+        "area_servidao_admin": 0,
+        "rl_situacao": "Não Analisada",
+        "rl_averbada": 0,
+        "rl_aprovada_nao_averbada": 0,
+        "rl_proposta": 0,
+        "app_total": 0,
+        "app_area_consolidada": 0,
+        "app_remanescente_veg_nat": 0,
+        "area_uso_restrito": 0,
+        "rl_passivo_excedente": -51.2168,
+        "rl_a_recompor": 0,
+        "app_a_recompor": 0,
+        "uso_restrito_a_recompor": 0
       },
       "bbox": [
         -57.373480796813958, -14.318571232940668, -57.358503341674805,
         -14.313248647515342
       ],
       "geometry": {
-        "type": "Polygon",
+        "type": "MultiPolygon",
         "coordinates": [
           [
             [
@@ -129,19 +221,42 @@
     {
       "type": "Feature",
       "properties": {
-        "recibo": "MS-5000609-6880376BC4CE4B65881ED02166964A92",
-        "modfiscais": 0.65,
-        "tema": "Área do Imovel",
+        "cod_imovel": "MS-5000609-6880376BC4CE4B65881ED02166964A92",
+        "mod_fiscal": 0.65,
+        "status": "AT",
+        "tipo": "IRU",
+        "condicao": "Analisado, aguardando atendimento a notificacao",
         "area": 29.0039,
         "municipio": "Amambai",
-        "estado": "Mato Grosso do Sul"
+        "UF": "MS",
+        "centroide": {
+          "type": "Point",
+          "coordinates": [-55.3935234065488, -23.1358023010569]
+        },
+        "data_inscricao": "2017-12-23T00:00:00.000Z",
+        "data_retificacao": "2017-12-23T00:00:00.000Z",
+        "veg_nat_remanescente": 4.7762,
+        "area_rural_consolidada": 24.2276,
+        "area_servidao_admin": 0,
+        "rl_situacao": "Não Analisada",
+        "rl_averbada": 0,
+        "rl_aprovada_nao_averbada": 0,
+        "rl_proposta": 4.7762,
+        "app_total": 0.6628,
+        "app_area_consolidada": 0.0101,
+        "app_remanescente_veg_nat": 0.6527,
+        "area_uso_restrito": 0,
+        "rl_passivo_excedente": -1.0242,
+        "rl_a_recompor": 0,
+        "app_a_recompor": 0,
+        "uso_restrito_a_recompor": 0
       },
       "bbox": [
         -55.397786390173636, -23.138217148659056, -55.388459619898995,
         -23.133618814055811
       ],
       "geometry": {
-        "type": "Polygon",
+        "type": "MultiPolygon",
         "coordinates": [
           [
             [
@@ -164,19 +279,42 @@
     {
       "type": "Feature",
       "properties": {
-        "recibo": "RS-4309209-06FEC9E5D1B640DAAF805273F5D3FDD7",
-        "modfiscais": 1.1367,
-        "tema": "Área do Imovel",
+        "cod_imovel": "RS-4309209-06FEC9E5D1B640DAAF805273F5D3FDD7",
+        "mod_fiscal": 1.1367,
+        "status": "AT",
+        "tipo": "IRU",
+        "condicao": "Aguardando analise",
         "area": 11.3672,
         "municipio": "Gravataí",
-        "estado": "Rio Grande do Sul"
+        "UF": "RS",
+        "centroide": {
+          "type": "Point",
+          "coordinates": [-51.0808133387125, -29.8528202670681]
+        },
+        "data_inscricao": "2017-10-19T00:00:00.000Z",
+        "data_retificacao": "2017-10-19T00:00:00.000Z",
+        "veg_nat_remanescente": 5.751026688784082,
+        "area_rural_consolidada": 5.415709177426824,
+        "area_servidao_admin": 0.1566577225118672,
+        "rl_situacao": "Não Analisada",
+        "rl_averbada": 0,
+        "rl_aprovada_nao_averbada": 0,
+        "rl_proposta": 5.751,
+        "app_total": 1.4329064608626003,
+        "app_area_consolidada": 0.5446,
+        "app_remanescente_veg_nat": 0.8883,
+        "area_uso_restrito": 0,
+        "rl_passivo_excedente": 3.5135,
+        "rl_a_recompor": 0,
+        "app_a_recompor": 0.3688,
+        "uso_restrito_a_recompor": 0
       },
       "bbox": [
         -51.082726529091097, -29.856086744757299, -51.078300690985017,
         -29.850256677544259
       ],
       "geometry": {
-        "type": "Polygon",
+        "type": "MultiPolygon",
         "coordinates": [
           [
             [
@@ -1467,19 +1605,42 @@
     {
       "type": "Feature",
       "properties": {
-        "recibo": "MS-5008008-B625637E707942B99579DB1D3DD8A7B6",
-        "modfiscais": 0.18,
-        "tema": "Área do Imovel",
+        "cod_imovel": "MS-5008008-B625637E707942B99579DB1D3DD8A7B6",
+        "mod_fiscal": 0.18,
+        "status": "AT",
+        "tipo": "IRU",
+        "condicao": "Analisado, em conformidade com a Lei n 12.651/2012",
         "area": 5.396,
         "municipio": "Terenos",
-        "estado": "Mato Grosso do Sul"
+        "UF": "MS",
+        "centroide": {
+          "type": "Point",
+          "coordinates": [-55.1799165157942, -20.5177448467608]
+        },
+        "data_inscricao": "2017-12-16T00:00:00.000Z",
+        "data_retificacao": "2019-09-08T00:00:00.000Z",
+        "veg_nat_remanescente": 0,
+        "area_rural_consolidada": 5.396,
+        "area_servidao_admin": 0,
+        "rl_situacao": "Não Analisada",
+        "rl_averbada": 0,
+        "rl_aprovada_nao_averbada": 0,
+        "rl_proposta": 0,
+        "app_total": 0,
+        "app_area_consolidada": 0,
+        "app_remanescente_veg_nat": 0,
+        "area_uso_restrito": 0,
+        "rl_passivo_excedente": -1.0792,
+        "rl_a_recompor": 0,
+        "app_a_recompor": 0,
+        "uso_restrito_a_recompor": 0
       },
       "bbox": [
         -55.181518058003554, -20.518806534235267, -55.178304215206005,
         -20.516699371008805
       ],
       "geometry": {
-        "type": "Polygon",
+        "type": "MultiPolygon",
         "coordinates": [
           [
             [
@@ -1496,19 +1657,42 @@
     {
       "type": "Feature",
       "properties": {
-        "recibo": "MS-5000856-BBCEED34A43F41CB882F445855E8E28D",
-        "modfiscais": 0.14,
-        "tema": "Área do Imovel",
+        "cod_imovel": "MS-5000856-BBCEED34A43F41CB882F445855E8E28D",
+        "mod_fiscal": 0.14,
+        "status": "AT",
+        "tipo": "IRU",
+        "condicao": "Analisado, em conformidade com a Lei n 12.651/2012, com ativos ambientais",
         "area": 5.0042,
         "municipio": "Angélica",
-        "estado": "Mato Grosso do Sul"
+        "UF": "MS",
+        "centroide": {
+          "type": "Point",
+          "coordinates": [-53.7880352791346, -22.1657322991708]
+        },
+        "data_inscricao": "2017-06-14T00:00:00.000Z",
+        "data_retificacao": "2019-08-28T00:00:00.000Z",
+        "veg_nat_remanescente": 0,
+        "area_rural_consolidada": 0,
+        "area_servidao_admin": 0,
+        "rl_situacao": "Não Analisada",
+        "rl_averbada": 0,
+        "rl_aprovada_nao_averbada": 0,
+        "rl_proposta": 0,
+        "app_total": 0,
+        "app_area_consolidada": 0,
+        "app_remanescente_veg_nat": 0,
+        "area_uso_restrito": 0,
+        "rl_passivo_excedente": -1.0008,
+        "rl_a_recompor": 0,
+        "app_a_recompor": 0,
+        "uso_restrito_a_recompor": 0
       },
       "bbox": [
         -53.790249603822559, -22.167472238075554, -53.785791802976441,
         -22.163988371608607
       ],
       "geometry": {
-        "type": "Polygon",
+        "type": "MultiPolygon",
         "coordinates": [
           [
             [
@@ -1525,19 +1709,42 @@
     {
       "type": "Feature",
       "properties": {
-        "recibo": "MT-5107602-16B425DE645348C2B3EFC872C43790F2",
-        "modfiscais": 0.2556,
-        "tema": "Área do Imovel",
+        "cod_imovel": "MT-5107602-16B425DE645348C2B3EFC872C43790F2",
+        "mod_fiscal": 0.2556,
+        "status": "AT",
+        "tipo": "IRU",
+        "condicao": "Aguardando analise",
         "area": 15.3376,
         "municipio": "Rondonópolis",
-        "estado": "Mato Grosso"
+        "UF": "MT",
+        "centroide": {
+          "type": "Point",
+          "coordinates": [-54.3929989157661, -16.4134845418591]
+        },
+        "data_inscricao": "2015-07-06T00:00:00.000Z",
+        "data_retificacao": "2015-07-06T00:00:00.000Z",
+        "veg_nat_remanescente": 0,
+        "area_rural_consolidada": 15.3376127415061,
+        "area_servidao_admin": 0,
+        "rl_situacao": "Não Analisada",
+        "rl_averbada": 0,
+        "rl_aprovada_nao_averbada": 0,
+        "rl_proposta": 0,
+        "app_total": 0,
+        "app_area_consolidada": 0,
+        "app_remanescente_veg_nat": 0,
+        "area_uso_restrito": 0,
+        "rl_passivo_excedente": -12.2701,
+        "rl_a_recompor": 0,
+        "app_a_recompor": 0,
+        "uso_restrito_a_recompor": 0
       },
       "bbox": [
         -54.39655065536499, -16.415997251556732, -54.389340877532952,
         -16.411016113293389
       ],
       "geometry": {
-        "type": "Polygon",
+        "type": "MultiPolygon",
         "coordinates": [
           [
             [

@@ -20,4 +20,19 @@
   @if (layersVisible) {
   <app-layers [@tuiSlideInRight]="{value: '', params: { duration: 200}}"></app-layers>
   }
+
+  @let car = (selectedCAR$ | async);
+
+  <div id="car-search-details-container" [class.car-selected]="car">
+    <div id="search-container">
+      <app-search-input></app-search-input>
+    </div>
+    @if (car) {
+    <tui-scrollbar>
+      <app-car-details [car]="car" [class.car-selected]="car"
+        [@tuiFadeIn]="{value: '', params: { duration: 300}}"></app-car-details>
+    </tui-scrollbar>
+    }
+  </div>
+
 </tui-root>

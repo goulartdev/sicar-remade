@@ -1,8 +1,19 @@
-import { StyleSpecification, addProtocol } from "maplibre-gl";
-import { Protocol } from "pmtiles";
+import { StyleSpecification } from "maplibre-gl";
 
-let protocol = new Protocol();
-addProtocol("pmtiles", protocol.tile);
+import { CARStatus } from "./models/car";
+
+interface StatusStyle {
+  value: CARStatus;
+  label: string;
+  color: string;
+}
+
+const CARStatusStyle: Record<CARStatus, StatusStyle> = {
+  AT: { value: "AT", label: "Ativo", color: "#4567ff" },
+  PE: { value: "PE", label: "Pendente", color: "#ffc533" },
+  SU: { value: "SU", label: "Suspenso", color: "#e0351b" },
+  CA: { value: "CA", label: "Cancelado", color: "#7d7d7d" },
+};
 
 const style: StyleSpecification = {
   version: 8,
@@ -21,6 +32,13 @@ const style: StyleSpecification = {
     administrative: {
       type: "vector",
       url: "pmtiles://http://localhost:9000/sicar/administrative.pmtiles",
+    },
+    selected_car: {
+      type: "geojson",
+      data: {
+        type: "FeatureCollection",
+        features: [],
+      },
     },
   },
   layers: [
@@ -45,13 +63,13 @@ const style: StyleSpecification = {
           "match",
           ["get", "ind_status"],
           "AT",
-          "#4567ff",
+          CARStatusStyle["AT"].color,
           "PE",
-          "#ffc533",
+          CARStatusStyle["PE"].color,
           "SU",
-          "#e0351b",
+          CARStatusStyle["SU"].color,
           "CA",
-          "#7d7d7d",
+          CARStatusStyle["CA"].color,
           "#000000",
         ],
         "fill-outline-color": "#000000",
@@ -62,16 +80,17 @@ const style: StyleSpecification = {
           0.5,
         ],
       },
+      filter: ["in", ["get", "ind_status"], ["literal", ["AT"]]],
       metadata: {
         legend: {
           label: "Imóveis",
           filterAttribute: "ind_status",
           expanded: true,
           categories: [
-            { value: "AT", label: "Ativo", color: "#4567ff" },
-            { value: "PE", label: "Pendente", color: "#ffc533" },
-            { value: "SU", label: "Suspenso", color: "#e0351b" },
-            { value: "CA", label: "Cancelado", color: "#7d7d7d" },
+            { ...CARStatusStyle["AT"], visible: true },
+            { ...CARStatusStyle["PE"], visible: false },
+            { ...CARStatusStyle["SU"], visible: false },
+            { ...CARStatusStyle["CA"], visible: false },
           ],
         },
         enableHoverStyle: true,
@@ -96,7 +115,20 @@ const style: StyleSpecification = {
         },
       },
     },
+    {
+      id: "selected_car",
+      source: "selected_car",
+      type: "line",
+      layout: {
+        visibility: "visible",
+      },
+      paint: {
+        "line-color": "#FF0000",
+        "line-width": 2,
+      },
+    },
   ],
 };
 
+export { CARStatusStyle };
 export default style;

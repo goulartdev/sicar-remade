@@ -1,10 +1,12 @@
 import {
   TUI_DARK_MODE,
-  TUI_ICON_RESOLVER,
   TuiButton,
   TuiIcon,
   TuiRoot,
+  TuiScrollbar,
   tuiSlideInRight,
+  tuiSlideInLeft,
+  tuiFadeIn,
 } from "@taiga-ui/core";
 import {
   ChangeDetectionStrategy,
@@ -13,38 +15,51 @@ import {
   OnInit,
   Renderer2,
 } from "@angular/core";
+import { Protocol } from "pmtiles";
 import { AsyncPipe, DOCUMENT } from "@angular/common";
 import { RouterOutlet } from "@angular/router";
 import { ControlComponent, MapService } from "@maplibre/ngx-maplibre-gl";
-import { LngLatBoundsLike, MapGeoJSONFeature } from "maplibre-gl";
+import { LngLatBoundsLike, MapGeoJSONFeature, addProtocol } from "maplibre-gl";
 
 import mapStyle from "./core/map-style";
-import { MapComponent, LayersComponent, SearchInputComponent } from "./components";
+import {
+  MapComponent,
+  LayersComponent,
+  SearchInputComponent,
+  CarDetailsComponent,
+} from "./components";
 import { CARService } from "./services";
+
+let protocol = new Protocol();
+addProtocol("pmtiles", protocol.tile);
 
 @Component({
   selector: "app-root",
   standalone: true,
   imports: [
     RouterOutlet,
+    AsyncPipe,
     TuiRoot,
     TuiIcon,
     TuiButton,
+    TuiScrollbar,
     ControlComponent,
     MapComponent,
     LayersComponent,
     SearchInputComponent,
+    CarDetailsComponent,
   ],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [MapService, CARService],
-  animations: [tuiSlideInRight],
+  animations: [tuiSlideInRight, tuiSlideInLeft, tuiFadeIn],
 })
 export class AppComponent implements OnInit {
-  private mapService = inject(MapService);
   private readonly document = inject(DOCUMENT);
   private readonly renderer = inject(Renderer2);
+  private readonly mapService = inject(MapService);
+  protected readonly carService = inject(CARService);
 
   protected readonly darkMode = inject(TUI_DARK_MODE);
   protected readonly mapStyle = mapStyle;
@@ -72,6 +87,14 @@ export class AppComponent implements OnInit {
     } else {
       this.renderer.removeAttribute(this.document.body, "tuiTheme");
     }
+  }
+
+  /*
+   * CAR
+   */
+
+  protected get selectedCAR$() {
+    return this.carService.selectedCAR$;
   }
 
   /*

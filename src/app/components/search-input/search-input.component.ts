@@ -1,10 +1,18 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
+  contentChild,
+  DestroyRef,
+  effect,
+  ElementRef,
   inject,
-  OnDestroy,
   OnInit,
   signal,
+  TemplateRef,
+  ViewChild,
+  viewChild,
+  ViewContainerRef,
 } from "@angular/core";
 import {
   AbstractControl,
@@ -14,13 +22,26 @@ import {
   ValidationErrors,
   ValidatorFn,
 } from "@angular/forms";
-import { NgIf } from "@angular/common";
-import { TuiButton, TuiIcon, TuiLoader, TuiTextfield } from "@taiga-ui/core";
-import { Subject, takeUntil } from "rxjs";
+import { NgIf, NgFor } from "@angular/common";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { ActivatedRoute, Router } from "@angular/router";
+import { take, tap } from "rxjs";
+import {
+  TuiButton,
+  TuiDataList,
+  TuiDropdownOpen,
+  TuiIcon,
+  TuiLoader,
+  TuiTextfield,
+  TuiTextfieldComponent,
+  TuiTextfieldDropdownDirective,
+} from "@taiga-ui/core";
+import { GeoJSONSource, LngLat } from "maplibre-gl";
+import { MapService } from "@maplibre/ngx-maplibre-gl";
 
 import { CARService } from "@services/car.service";
-import { CARCode, isCARNumber } from "@core/models/car";
-import { ActivatedRoute } from "@angular/router";
+import { isCARNumber, CAR } from "@core/models/car";
+import { SearchService, SearchTerm } from "@services/search.service";
 
 function CARValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -31,74 +52,164 @@ function CARValidator(): ValidatorFn {
   };
 }
 
+export type LngLatString = `${string & { __brand: "\\d,\\d" }}`;
+
+function isLatLngString(value: string): value is LngLatString {
+  const regexp = new RegExp(/^(-?\d+(\.\d+)?),\s*(-?\d+(\.\d+)?)$/);
+  return regexp.test(value);
+}
+
 @Component({
   selector: "app-search-input",
   standalone: true,
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    TuiIcon,
     TuiTextfield,
     TuiLoader,
     TuiButton,
-    NgIf,
+    TuiDataList,
+    TuiDropdownOpen,
   ],
   templateUrl: "./search-input.component.html",
   styleUrl: "./search-input.component.css",
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [SearchService],
 })
-export class SearchInputComponent implements OnInit, OnDestroy {
+export class SearchInputComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  private readonly destroyRef = inject(DestroyRef);
   private readonly CARService = inject(CARService);
-  private readonly cancelRequest$$ = new Subject();
+  private readonly searchService = inject(SearchService);
+  private readonly mapService = inject(MapService);
 
-  protected input = new FormControl<CARCode | "">("", {
+  protected input = viewChild<ElementRef>("searchInput");
+  protected textfield = viewChild(TuiTextfieldComponent, { read: TuiDropdownOpen });
+
+  //protected input = new FormControl<CARCode | "">("", {
+  protected inputCtrl = new FormControl<string>("", {
     nonNullable: true,
-    validators: [CARValidator()],
+    //validators: [CARValidator()],
   });
 
-  protected isSearching = signal(false);
+  private readonly datalist = viewChild(TuiTextfieldDropdownDirective);
 
+  protected readonly isSearching = signal(false);
+  protected readonly results = signal<CAR[]>([]);
+  protected readonly hasResults = computed(() => this.results().length > 1);
+  protected readonly open = computed(() => {
+    return !!this.datalist();
+  });
+
+  //constructor() {
+  //  effect(
+  //    () => {
+  //      this.datalist();
+  //      setTimeout(() => {
+  //        this.textfield()?.toggle(this.hasResults());
+  //      }, 1);
+  //    },
+  //    { allowSignalWrites: true },
+  //  );
+  //}
   ngOnInit() {
-    this.route.queryParams.subscribe(({ car }) => {
-      this.input.setValue(car);
+    this.route.queryParams.pipe(take(1)).subscribe(({ search }) => {
+      this.inputCtrl.setValue(search);
       this.search();
     });
+
+    this.searchService.searchState$
+      .pipe(
+        tap((state) => {
+          this.isSearching.set(state.status === "SEARCHING");
+
+          if (state.status === "SEARCHING") {
+            this.updateSearchParam(state.term);
+          }
+
+          if (state.status === "SUCCESS") {
+            if (Array.isArray(state.results)) {
+              if (state.results.length > 1) {
+                this.results.set(state.results);
+                this.inputCtrl.patchValue("");
+                const extent = state.results.reduce((ext, { bbox }) => {
+                  return [
+                    Math.min(ext[0] ?? bbox[0], bbox[0]),
+                    Math.min(ext[1] ?? bbox[1], bbox[1]),
+                    Math.max(ext[2] ?? bbox[2], bbox[2]),
+                    Math.max(ext[3] ?? bbox[3], bbox[3]),
+                  ];
+                }, [] as number[]) as [number, number, number, number];
+
+                this.mapService.fitBounds(extent, {
+                  padding: { top: 100, right: 100, bottom: 100, left: 510 },
+                });
+                this.input()?.nativeElement.focus();
+                //this.focus.set(true);
+              } else if (state.results.length === 1) {
+                this.updateSearchParam(state.results[0].properties.cod_imovel);
+                this.CARService.selectCAR(state.results[0]);
+              } else {
+                // TODO: handle no results
+              }
+            } else {
+              this.CARService.selectCAR(state.results);
+            }
+          } else {
+            this.CARService.clearSelectedCAR();
+            this.results.set([]);
+          }
+        }),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe();
   }
 
   protected search() {
-    if (this.isSearching() === true) {
-      return;
+    const value = this.inputCtrl.value;
+
+    if (isLatLngString(value)) {
+      const [lon, lat] = value.split(",");
+      this.searchService.search([parseFloat(lon), parseFloat(lat)]);
     }
 
-    this.cancelRequest$$.next(null);
-    this.CARService.selectCAR(null);
-    const value = this.input.value;
-
-    if (!isCARNumber(value)) {
-      return;
+    if (isCARNumber(value)) {
+      this.searchService.search(value);
     }
-
-    this.isSearching.set(true);
-    this.CARService.find(value)
-      .pipe(takeUntil(this.cancelRequest$$))
-      .subscribe({
-        next: (car) => this.CARService.selectCAR(car),
-        error: (err) => this.handleSearchError(err),
-        complete: () => this.isSearching.set(false),
-      });
   }
 
-  private handleSearchError(err: unknown) {
-    // TODO: implement
+  protected select(car: CAR) {
+    this.updateSearchParam(car.properties.cod_imovel);
+    this.results.set([]);
+    this.CARService.selectCAR(car);
   }
 
-  public clear() {
-    this.input.setValue("");
+  protected clear() {
     this.CARService.clearSelectedCAR();
+    this.results.set([]);
+    this.inputCtrl.setValue("");
   }
 
-  public ngOnDestroy(): void {
-    this.cancelRequest$$.next(null);
+  protected updateHighlight(data: GeoJSON.GeoJSON) {
+    const source = this.mapService.mapInstance.getSource(
+      "selected_car",
+    ) as GeoJSONSource;
+
+    source.setData(data);
+  }
+
+  private updateSearchParam(value: SearchTerm) {
+    const term =
+      typeof value === "string" ? value : LngLat.convert(value).toArray().join(",");
+
+    this.inputCtrl.patchValue(term);
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { search: term },
+      onSameUrlNavigation: "ignore",
+      replaceUrl: true,
+    });
   }
 }

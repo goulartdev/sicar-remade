@@ -12,12 +12,11 @@ import {
 import { LayerControlComponent } from "./layer-control/layer-control.component";
 
 @Component({
-  selector: "app-layers",
-  standalone: true,
-  imports: [NgFor, CdkDropList, CdkDrag, CdkDragPlaceholder, LayerControlComponent],
-  templateUrl: "./layers.component.html",
-  styleUrl: "./layers.component.css",
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-layers",
+    imports: [NgFor, CdkDropList, CdkDrag, CdkDragPlaceholder, LayerControlComponent],
+    templateUrl: "./layers.component.html",
+    styleUrl: "./layers.component.css",
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LayersComponent {
   private readonly mapService = inject(MapService);

@@ -32,15 +32,15 @@
   )
 
   datasets=(
-    "AREA_IMOVEL"
+    # "AREA_IMOVEL"
     # "APPS"
     # "VEGETACAO_NATIVA"
-    # "AREA_CONSOLIDADA"
-    # "AREA_POUSIO"
-    # "HIDROGRAFIA"
-    # "USO_RESTRITO"
-    # "SERVIDAO_ADMINISTRATIVA"
-    # "RESERVA_LEGAL"
+    "AREA_CONSOLIDADA"
+    "AREA_POUSIO"
+    "HIDROGRAFIA"
+    "USO_RESTRITO"
+    "SERVIDAO_ADMINISTRATIVA"
+    "RESERVA_LEGAL"
   )
 
   # obs: às vezes a conexão com o site é perdida e o download trava.
@@ -71,7 +71,7 @@
           printf "Abra o arquivo captcha.png e informe o captcha: "
           read -r captcha
 
-          printf "Baixando área do imóvel...\n"
+          printf "Baixando %s...\n" "$ds"
 
           curl $opts --progress-bar -o "$output" -X GET "$(printf $download_url $uf $ds $captcha)"
 

@@ -20,40 +20,40 @@ import { AsyncPipe, DOCUMENT } from "@angular/common";
 import { RouterOutlet } from "@angular/router";
 import { ControlComponent, MapService } from "@maplibre/ngx-maplibre-gl";
 import { LngLatBoundsLike, MapGeoJSONFeature, addProtocol } from "maplibre-gl";
+import { map } from "rxjs";
 
 import mapStyle from "./core/map-style";
+import { CARService } from "./services";
 import {
   MapComponent,
   LayersComponent,
   SearchInputComponent,
   CarDetailsComponent,
 } from "./components";
-import { CARService } from "./services";
 
 let protocol = new Protocol();
 addProtocol("pmtiles", protocol.tile);
 
 @Component({
-  selector: "app-root",
-  standalone: true,
-  imports: [
-    RouterOutlet,
-    AsyncPipe,
-    TuiRoot,
-    TuiIcon,
-    TuiButton,
-    TuiScrollbar,
-    ControlComponent,
-    MapComponent,
-    LayersComponent,
-    SearchInputComponent,
-    CarDetailsComponent,
-  ],
-  templateUrl: "./app.component.html",
-  styleUrl: "./app.component.css",
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [MapService, CARService],
-  animations: [tuiSlideInRight, tuiSlideInLeft, tuiFadeIn],
+    selector: "app-root",
+    imports: [
+        RouterOutlet,
+        AsyncPipe,
+        TuiRoot,
+        TuiIcon,
+        TuiButton,
+        TuiScrollbar,
+        ControlComponent,
+        MapComponent,
+        LayersComponent,
+        SearchInputComponent,
+        CarDetailsComponent,
+    ],
+    templateUrl: "./app.component.html",
+    styleUrl: "./app.component.css",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [MapService, CARService],
+    animations: [tuiSlideInRight, tuiSlideInLeft, tuiFadeIn]
 })
 export class AppComponent implements OnInit {
   private readonly document = inject(DOCUMENT);
@@ -63,6 +63,7 @@ export class AppComponent implements OnInit {
 
   protected readonly darkMode = inject(TUI_DARK_MODE);
   protected readonly mapStyle = mapStyle;
+  protected readonly mapLoaded$ = this.mapService.mapLoaded$.pipe(map(() => true));
 
   protected layersVisible = false;
   protected bounds: LngLatBoundsLike = [-33.437108, 6.672897, -74.404622, -34.796086];
@@ -70,7 +71,7 @@ export class AppComponent implements OnInit {
   public ngOnInit() {
     this.setDarkMode(this.darkMode());
 
-    this.mapService.mapLoaded$.subscribe({
+    this.mapLoaded$.subscribe({
       next: () => this.setupOnHoverEffects(),
     });
   }
@@ -96,6 +97,20 @@ export class AppComponent implements OnInit {
   protected get selectedCAR$() {
     return this.carService.selectedCAR$;
   }
+
+  //private setupSearchCAROnMouseClick() {
+  //  this.mapService.mapInstance.on("click", (e) => {
+  //    //this.carService.listAt(e.lngLat).subscribe({
+  //    //  next: (results: CAR[]) => {
+  //    //
+  //    //  },
+  //    //  error:
+  //    //});
+  //  });
+  //  fromEvent(this.mapService.mapInstance, "click").subscribe({
+  //    next: (e) => console.log(e.lngLat),
+  //  });
+  //}
 
   /*
    * Hover style

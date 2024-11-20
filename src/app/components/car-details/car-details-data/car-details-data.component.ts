@@ -7,20 +7,19 @@ import { CARData } from "@core/models/car";
 import { FormatDegreesPipe } from "src/app/pipes/format-degrees.pipe";
 
 @Component({
-  selector: "app-car-details-data",
-  standalone: true,
-  imports: [
-    DecimalPipe,
-    DatePipe,
-    TuiExpand,
-    TuiChevron,
-    TuiIcon,
-    TuiAccordion,
-    FormatDegreesPipe,
-  ],
-  templateUrl: "./car-details-data.component.html",
-  styleUrl: "./car-details-data.component.css",
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "app-car-details-data",
+    imports: [
+        DecimalPipe,
+        DatePipe,
+        TuiExpand,
+        TuiChevron,
+        TuiIcon,
+        TuiAccordion,
+        FormatDegreesPipe,
+    ],
+    templateUrl: "./car-details-data.component.html",
+    styleUrl: "./car-details-data.component.css",
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CarDetailsDataComponent {
   @Input({ required: true }) car!: CARData;

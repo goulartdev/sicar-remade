@@ -19,11 +19,8 @@
     ogr2ogr -of GeoJSON -nlt MULTIPOLYGON -t_srs EPSG:4326 -progress "$uf_output.geojson" "/vsizip/$uf_output.zip"
   fi
 
-  if [ -e "$uf_output.pmtiles" ]; then
-    rm "${uf_output}.pmtiles"
-  fi
+  tippecanoe -z5 -o "$uf_output.pmtiles" --hilbert --include "NM_UF" -l "administrative" --force "$uf_output.geojson"
 
-  tippecanoe -z5 -o "$uf_output.pmtiles" --hilbert --include "NM_UF" -l "administrative" "$uf_output.geojson"
   rm "$uf_output.geojson"
 
 
@@ -39,18 +36,9 @@
     ogr2ogr -of GeoJSON -nlt MULTIPOLYGON -t_srs EPSG:4326 -progress "$mun_output.geojson" "/vsizip/$mun_output.zip"
   fi
 
-  if [ -e "$mun_output.pmtiles" ]; then
-    rm "${mun_output}.pmtiles"
-  fi
+  tippecanoe -zg -Z6 -o "$mun_output.pmtiles" --hilbert --include "NM_MUN" -l "administrative" --force "$mun_output.geojson"
 
-  tippecanoe -zg -Z6 -o "$mun_output.pmtiles" --hilbert --include "NM_MUN" -l "administrative" "$mun_output.geojson"
   rm "$mun_output.geojson"
 
-  admin_output="$output_path/administrative.pmtiles"
-
-  if [ -e "$admin_output" ]; then
-    rm "$admin_output"
-  fi
-
-  tile-join -l "administrative" -o "$admin_output" "$mun_output.pmtiles" "$uf_output.pmtiles"
+  tile-join -l "administrative" -o "$output_path/administrative.pmtiles" "$mun_output.pmtiles" --force "$uf_output.pmtiles"
 )

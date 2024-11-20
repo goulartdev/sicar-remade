@@ -21,6 +21,7 @@
   <app-layers [@tuiSlideInRight]="{value: '', params: { duration: 200}}"></app-layers>
   }
 
+  @if (mapLoaded$ | async) {
   @let car = (selectedCAR$ | async);
 
   <div id="car-search-details-container" [class.car-selected]="car">
@@ -34,5 +35,6 @@
     </tui-scrollbar>
     }
   </div>
+  }
 
 </tui-root>

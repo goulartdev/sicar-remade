@@ -2,8 +2,12 @@
   --tui-background-neutral-1: transparent;
   --tui-background-neutral-1-hover: transparent;
   display: block;
-  background-color: var(--tui-background-base);
-  border-radius: var(--tui-radius-m);
+
+  tui-textfield,
+  tui-data-list {
+    background-color: var(--tui-background-base);
+    border-radius: var(--tui-radius-m);
+  }
 
   [tuiAppearance][data-appearance=textfield] {
     --t-shadow: unset;

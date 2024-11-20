@@ -1,8 +1,8 @@
 (
   set -euo pipefail
   datasets=(
-    "AREA_IMOVEL"
-    # "APPS"
+    # "AREA_IMOVEL"
+    "APPS"
     # "VEGETACAO_NATIVA"
     # "AREA_CONSOLIDADA"
     # "AREA_POUSIO"

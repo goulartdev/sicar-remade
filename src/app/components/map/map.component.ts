@@ -9,12 +9,11 @@ import { MapComponent as MglMapComponent } from "@maplibre/ngx-maplibre-gl";
 */
 
 @Component({
-  selector: "app-map",
-  standalone: true,
-  imports: [],
-  template: "<div #container></div>",
-  styles: [
-    `
+    selector: "app-map",
+    imports: [],
+    template: "<div #container></div>",
+    styles: [
+        `
       :host {
         display: block;
       }
@@ -23,7 +22,7 @@ import { MapComponent as MglMapComponent } from "@maplibre/ngx-maplibre-gl";
         width: 100%;
       }
     `,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MapComponent extends MglMapComponent {}

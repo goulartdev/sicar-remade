@@ -85,7 +85,7 @@ export class CARService {
 
     if (car && navigate) {
       this.mapService.fitBounds(car.bbox, {
-        padding: { top: 100, right: 100, bottom: 100, left: 510 },
+        padding: { top: 100, right: 100, bottom: 100, left: 550 },
       });
     }
   }

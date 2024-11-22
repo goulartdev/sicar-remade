@@ -13,3 +13,19 @@
     --t-shadow: unset;
   }
 }
+
+tui-data-list button {
+  justify-content: initial;
+  gap: 8px;
+
+  .car-status-badge {
+    width: 62px;
+    text-align: center;
+  }
+
+  .car-number {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

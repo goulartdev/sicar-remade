@@ -9,3 +9,11 @@ body {
 .maplibregl-ctrl button:not(:disabled):hover {
   background: var(--t-bg);
 }
+
+.car-status-badge {
+  font-weight: bold;
+  color: white;
+  background-color: var(--car-status-color);
+  padding: 2px 6px;
+  border-radius: var(--tui-radius-xs);
+}

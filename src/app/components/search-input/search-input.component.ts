@@ -1,18 +1,14 @@
 import {
+  afterRenderEffect,
   ChangeDetectionStrategy,
   Component,
   computed,
-  contentChild,
   DestroyRef,
-  effect,
   ElementRef,
   inject,
   OnInit,
   signal,
-  TemplateRef,
-  ViewChild,
   viewChild,
-  ViewContainerRef,
 } from "@angular/core";
 import {
   AbstractControl,
@@ -22,7 +18,6 @@ import {
   ValidationErrors,
   ValidatorFn,
 } from "@angular/forms";
-import { NgIf, NgFor } from "@angular/common";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { ActivatedRoute, Router } from "@angular/router";
 import { take, tap } from "rxjs";
@@ -30,11 +25,9 @@ import {
   TuiButton,
   TuiDataList,
   TuiDropdownOpen,
-  TuiIcon,
   TuiLoader,
   TuiTextfield,
   TuiTextfieldComponent,
-  TuiTextfieldDropdownDirective,
 } from "@taiga-ui/core";
 import { GeoJSONSource, LngLat } from "maplibre-gl";
 import { MapService } from "@maplibre/ngx-maplibre-gl";
@@ -42,6 +35,7 @@ import { MapService } from "@maplibre/ngx-maplibre-gl";
 import { CARService } from "@services/car.service";
 import { isCARNumber, CAR } from "@core/models/car";
 import { SearchService, SearchTerm } from "@services/search.service";
+import { CARStatusPipe } from "src/app/pipes/car-status.pipe";
 
 function CARValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -70,6 +64,7 @@ function isLatLngString(value: string): value is LngLatString {
     TuiButton,
     TuiDataList,
     TuiDropdownOpen,
+    CARStatusPipe,
   ],
   templateUrl: "./search-input.component.html",
   styleUrl: "./search-input.component.css",
@@ -85,7 +80,7 @@ export class SearchInputComponent implements OnInit {
   private readonly mapService = inject(MapService);
 
   protected input = viewChild<ElementRef>("searchInput");
-  protected textfield = viewChild(TuiTextfieldComponent, { read: TuiDropdownOpen });
+  protected dropdown = viewChild(TuiTextfieldComponent, { read: TuiDropdownOpen });
 
   //protected input = new FormControl<CARCode | "">("", {
   protected inputCtrl = new FormControl<string>("", {
@@ -93,26 +88,14 @@ export class SearchInputComponent implements OnInit {
     //validators: [CARValidator()],
   });
 
-  private readonly datalist = viewChild(TuiTextfieldDropdownDirective);
-
   protected readonly isSearching = signal(false);
   protected readonly results = signal<CAR[]>([]);
   protected readonly hasResults = computed(() => this.results().length > 1);
-  protected readonly open = computed(() => {
-    return !!this.datalist();
-  });
 
-  //constructor() {
-  //  effect(
-  //    () => {
-  //      this.datalist();
-  //      setTimeout(() => {
-  //        this.textfield()?.toggle(this.hasResults());
-  //      }, 1);
-  //    },
-  //    { allowSignalWrites: true },
-  //  );
-  //}
+  private readonly effectRef = afterRenderEffect(() =>
+    this.dropdown()?.toggle(this.hasResults()),
+  );
+
   ngOnInit() {
     this.route.queryParams.pipe(take(1)).subscribe(({ search }) => {
       this.inputCtrl.setValue(search);
@@ -143,10 +126,9 @@ export class SearchInputComponent implements OnInit {
                 }, [] as number[]) as [number, number, number, number];
 
                 this.mapService.fitBounds(extent, {
-                  padding: { top: 100, right: 100, bottom: 100, left: 510 },
+                  padding: { top: 100, right: 100, bottom: 100, left: 550 },
                 });
                 this.input()?.nativeElement.focus();
-                //this.focus.set(true);
               } else if (state.results.length === 1) {
                 this.updateSearchParam(state.results[0].properties.cod_imovel);
                 this.CARService.selectCAR(state.results[0]);

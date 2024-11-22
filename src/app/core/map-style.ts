@@ -2,7 +2,7 @@ import { StyleSpecification } from "maplibre-gl";
 
 import { CARStatus } from "./models/car";
 
-interface StatusStyle {
+export interface StatusStyle {
   value: CARStatus;
   label: string;
   color: string;

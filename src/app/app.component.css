@@ -19,7 +19,7 @@ app-layers {
   position: absolute;
   top: 0;
   left: 0;
-  width: 440px;
+  width: 480px;
   display: flex;
   flex-direction: column;
   background-clip: padding-box;

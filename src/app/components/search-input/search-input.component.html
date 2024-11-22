@@ -1,31 +1,28 @@
 <form (ngSubmit)="search()">
-  <tui-textfield #searchField tuiTextfieldSize="m" [tuiTextfieldCleaner]="false" [open]="open()">
-    <!--<tui-input #searchField>-->
+  <tui-textfield #searchField tuiTextfieldSize="m" [tuiTextfieldCleaner]="false">
     <input #searchInput id="search-input" tuiTextfield type="text" [formControl]="inputCtrl"
       [placeholder]="searchField.focused() ? '' : 'Número do CAR'" [invalid]="inputCtrl.invalid">
 
     @if (isSearching()) {
-    <tui-loader />
+    <tui-loader size="m" />
     } @else {
     <button tuiIconButton appearance="icon" size="xs" type="button" iconStart="@tui.search" (click)="search()"></button>
     }
     <button tuiIconButton appearance="icon" size="xs" type="button" iconStart="@tui.x" (click)="clear()"></button>
 
-    <!--@if (hasResults()) {-->
+    @if (hasResults()) {
     <tui-data-list *tuiTextfieldDropdown>
       <tui-opt-group>
         @for (car of results(); track car.properties.cod_imovel) {
+        @let status = car.properties.status | CARStatus;
         <button tuiOption type="button" (click)="select(car)" (mouseenter)="updateHighlight(car)"
           (mouseleave)="updateHighlight({ type: 'FeatureCollection', features: [] })">
-          {{ car.properties.cod_imovel }}
+          <span style="--car-status-color: {{status.color}}" class="car-status-badge">{{status.label}}</span>
+          <span class="car-number">{{car.properties.cod_imovel}}</span>
         </button>
         }
       </tui-opt-group>
     </tui-data-list>
-    <!--}-->
-    <!--</tui-input>-->
+    }
   </tui-textfield>
-  <!--{{hasResults()}}-->
-  <!--{{open()}}-->
-  <!--{{asd()}}-->
 </form>

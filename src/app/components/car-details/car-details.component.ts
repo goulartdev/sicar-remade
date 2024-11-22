@@ -8,18 +8,17 @@ import {
 } from "@angular/core";
 import { GeoJSONSource } from "maplibre-gl";
 import { MapService } from "@maplibre/ngx-maplibre-gl";
-import { TuiTitle } from "@taiga-ui/core";
 
 import { CAR } from "@core/models/car";
 import { CARStatusStyle } from "@core/map-style";
 import { CarDetailsDataComponent } from "./car-details-data/car-details-data.component";
 
 @Component({
-    selector: "app-car-details",
-    imports: [TuiTitle, CarDetailsDataComponent],
-    templateUrl: "./car-details.component.html",
-    styleUrl: "./car-details.component.css",
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: "app-car-details",
+  imports: [CarDetailsDataComponent],
+  templateUrl: "./car-details.component.html",
+  styleUrl: "./car-details.component.css",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarDetailsComponent implements OnInit, OnDestroy {
   private map = inject(MapService).mapInstance;

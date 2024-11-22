@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from "@angular/common";
 import { ChangeDetectionStrategy, Component, inject, Input } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MapService } from "@maplibre/ngx-maplibre-gl";
@@ -21,21 +20,19 @@ type Legend = {
 };
 
 @Component({
-    selector: "app-layer-control",
-    imports: [
-        FormsModule,
-        TuiCheckbox,
-        TuiLabel,
-        TuiTitle,
-        TuiIcon,
-        TuiExpand,
-        TuiChevron,
-        NgFor,
-        NgIf,
-    ],
-    templateUrl: "./layer-control.component.html",
-    styleUrl: "./layer-control.component.css",
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: "app-layer-control",
+  imports: [
+    FormsModule,
+    TuiCheckbox,
+    TuiLabel,
+    TuiTitle,
+    TuiIcon,
+    TuiExpand,
+    TuiChevron,
+  ],
+  templateUrl: "./layer-control.component.html",
+  styleUrl: "./layer-control.component.css",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayerControlComponent {
   private mapService = inject(MapService);

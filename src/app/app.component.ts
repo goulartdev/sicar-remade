@@ -17,7 +17,6 @@ import {
 } from "@angular/core";
 import { Protocol } from "pmtiles";
 import { AsyncPipe, DOCUMENT } from "@angular/common";
-import { RouterOutlet } from "@angular/router";
 import { ControlComponent, MapService } from "@maplibre/ngx-maplibre-gl";
 import { LngLatBoundsLike, MapGeoJSONFeature, addProtocol } from "maplibre-gl";
 import { map } from "rxjs";
@@ -35,25 +34,24 @@ let protocol = new Protocol();
 addProtocol("pmtiles", protocol.tile);
 
 @Component({
-    selector: "app-root",
-    imports: [
-        RouterOutlet,
-        AsyncPipe,
-        TuiRoot,
-        TuiIcon,
-        TuiButton,
-        TuiScrollbar,
-        ControlComponent,
-        MapComponent,
-        LayersComponent,
-        SearchInputComponent,
-        CarDetailsComponent,
-    ],
-    templateUrl: "./app.component.html",
-    styleUrl: "./app.component.css",
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [MapService, CARService],
-    animations: [tuiSlideInRight, tuiSlideInLeft, tuiFadeIn]
+  selector: "app-root",
+  imports: [
+    AsyncPipe,
+    TuiRoot,
+    TuiIcon,
+    TuiButton,
+    TuiScrollbar,
+    ControlComponent,
+    MapComponent,
+    LayersComponent,
+    SearchInputComponent,
+    CarDetailsComponent,
+  ],
+  templateUrl: "./app.component.html",
+  styleUrl: "./app.component.css",
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [MapService, CARService],
+  animations: [tuiSlideInRight, tuiSlideInLeft, tuiFadeIn],
 })
 export class AppComponent implements OnInit {
   private readonly document = inject(DOCUMENT);
@@ -97,20 +95,6 @@ export class AppComponent implements OnInit {
   protected get selectedCAR$() {
     return this.carService.selectedCAR$;
   }
-
-  //private setupSearchCAROnMouseClick() {
-  //  this.mapService.mapInstance.on("click", (e) => {
-  //    //this.carService.listAt(e.lngLat).subscribe({
-  //    //  next: (results: CAR[]) => {
-  //    //
-  //    //  },
-  //    //  error:
-  //    //});
-  //  });
-  //  fromEvent(this.mapService.mapInstance, "click").subscribe({
-  //    next: (e) => console.log(e.lngLat),
-  //  });
-  //}
 
   /*
    * Hover style

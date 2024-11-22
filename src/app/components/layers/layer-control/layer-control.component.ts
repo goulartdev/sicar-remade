@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject, input } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MapService } from "@maplibre/ngx-maplibre-gl";
 import { TuiExpand, TuiIcon, TuiLabel, TuiTitle } from "@taiga-ui/core";
@@ -37,14 +37,14 @@ type Legend = {
 export class LayerControlComponent {
   private mapService = inject(MapService);
 
-  @Input({ required: true }) layerId!: string;
+  public layerId = input.required<string>();
 
   private get map() {
     return this.mapService.mapInstance;
   }
 
   private get layer() {
-    return this.map.getLayer(this.layerId)!;
+    return this.map.getLayer(this.layerId())!;
   }
 
   protected get legend(): Legend {

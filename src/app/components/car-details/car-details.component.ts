@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  Input,
+  input,
   OnDestroy,
   OnInit,
 } from "@angular/core";
@@ -23,15 +23,15 @@ import { CarDetailsDataComponent } from "./car-details-data/car-details-data.com
 export class CarDetailsComponent implements OnInit, OnDestroy {
   private map = inject(MapService).mapInstance;
 
-  @Input({ required: true }) car!: CAR;
+  public car = input.required<CAR>();
 
   ngOnInit() {
     const source: GeoJSONSource = this.getGeoJSONSource("selected_car")!;
-    source.setData(this.car);
+    source.setData(this.car());
   }
 
   get status() {
-    return CARStatusStyle[this.car.properties.status];
+    return CARStatusStyle[this.car().properties.status];
   }
 
   private getGeoJSONSource(name: string): GeoJSONSource | undefined {

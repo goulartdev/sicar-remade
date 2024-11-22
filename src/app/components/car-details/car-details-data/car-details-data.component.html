@@ -1,11 +1,11 @@
 <div class="data-section">
   <dl>
     <dt>Registro</dt>
-    <dd>{{car.cod_imovel}}</dd>
+    <dd>{{car().cod_imovel}}</dd>
   </dl>
   <dl>
     <dt>Condição Externa</dt>
-    <dd>{{car.condicao}}</dd>
+    <dd>{{car().condicao}}</dd>
   </dl>
 </div>
 <header (click)="expanded.property = !expanded.property">
@@ -15,33 +15,33 @@
 <tui-expand class="data-section" [expanded]="expanded.property">
   <dl>
     <dt>Área do Imóvel Rural</dt>
-    <dd>{{car.area | number: '1.2-2'}} ha</dd>
+    <dd>{{car().area | number: '1.2-2'}} ha</dd>
   </dl>
   <dl>
     <dt>Módulo Fiscal</dt>
-    <dd>{{car.mod_fiscal}}</dd>
+    <dd>{{car().mod_fiscal}}</dd>
   </dl>
   <dl>
     <dt>Município / UF</dt>
-    <dd>{{car.municipio}} ({{car.UF}})</dd>
+    <dd>{{car().municipio}} ({{car().UF}})</dd>
   </dl>
   <dl>
     <dt>Coordenadas Geográficas do Centróide</dt>
     <dd>
-      {{car.centroide.coordinates[0] | formatDegrees:'lng':'1.2-2'}}
+      {{car().centroide.coordinates[0] | formatDegrees:'lng':'1.2-2'}}
       <br />
-      {{car.centroide.coordinates[1] | formatDegrees:'lat':'1.2-2'}}
+      {{car().centroide.coordinates[1] | formatDegrees:'lat':'1.2-2'}}
     </dd>
   </dl>
   <dl>
     <dt>Data da Inscrição</dt>
-    <dd>{{car.data_inscricao | date: 'dd/MM/yyyy'}}</dd>
+    <dd>{{car().data_inscricao | date: 'dd/MM/yyyy'}}</dd>
   </dl>
   <dl>
     <dt>Data da Última Retificação</dt>
     <dd>
-      @if (car.data_inscricao.getTime() !== car.data_retificacao.getTime()) {
-      {{car.data_retificacao | date: 'dd/MM/yyyy'}}
+      @if (car().data_inscricao.getTime() !== car().data_retificacao.getTime()) {
+      {{car().data_retificacao | date: 'dd/MM/yyyy'}}
       } @else {
       -
       }
@@ -55,15 +55,15 @@
 <tui-expand class="data-section" [expanded]="expanded.soil">
   <dl>
     <dt>Área de Remanescente de Vegetação Nativa</dt>
-    <dd>{{car.veg_nat_remanescente | number: '1.2-2'}} ha</dd>
+    <dd>{{car().veg_nat_remanescente | number: '1.2-2'}} ha</dd>
   </dl>
   <dl>
     <dt>Área Rural Consolidada</dt>
-    <dd>{{car.area_rural_consolidada | number: '1.2-2'}} ha</dd>
+    <dd>{{car().area_rural_consolidada | number: '1.2-2'}} ha</dd>
   </dl>
   <dl>
     <dt>Área de Servidão Administrativa</dt>
-    <dd>{{car.area_servidao_admin | number: '1.2-2'}} ha</dd>
+    <dd>{{car().area_servidao_admin | number: '1.2-2'}} ha</dd>
   </dl>
 </tui-expand>
 <header (click)="expanded.legalReserve = !expanded.legalReserve">
@@ -73,23 +73,23 @@
 <tui-expand class="data-section" [expanded]="expanded.legalReserve">
   <dl>
     <dt>Localização da Reserva Legal</dt>
-    <dd><span>{{car.rl_situacao}}</span></dd>
+    <dd><span>{{car().rl_situacao}}</span></dd>
   </dl>
   <dl>
     <dt>Área de Reserva Legal Averbada</dt>
-    <dd>{{car.rl_averbada | number: '1.2-2'}} ha</dd>
+    <dd>{{car().rl_averbada | number: '1.2-2'}} ha</dd>
   </dl>
   <dl>
     <dt>Área de Reserva Legal Aprovada não Averbada</dt>
-    <dd>{{car.rl_aprovada_nao_averbada | number: '1.2-2'}} ha</dd>
+    <dd>{{car().rl_aprovada_nao_averbada | number: '1.2-2'}} ha</dd>
   </dl>
   <dl>
     <dt>Área de Reserva Legal Proposta</dt>
-    <dd>{{car.rl_proposta | number: '1.2-2'}} ha</dd>
+    <dd>{{car().rl_proposta | number: '1.2-2'}} ha</dd>
   </dl>
   <dl>
     <dt>Total de Reserva Legal Declarada pelo Proprietário/Possuidor</dt>
-    <dd>{{car.rl_averbada + car.rl_aprovada_nao_averbada + car.rl_proposta | number: '1.2-2'}} ha</dd>
+    <dd>{{car().rl_averbada + car().rl_aprovada_nao_averbada + car().rl_proposta | number: '1.2-2'}} ha</dd>
   </dl>
 </tui-expand>
 <header (click)="expanded.app = !expanded.app">
@@ -99,15 +99,15 @@
 <tui-expand class="data-section" [expanded]="expanded.app">
   <dl>
     <dt>APP</dt>
-    <dd>{{car.app_total | number: '1.2-2'}} ha</dd>
+    <dd>{{car().app_total | number: '1.2-2'}} ha</dd>
   </dl>
   <dl>
     <dt>APP em Área Consolidada</dt>
-    <dd>{{car.app_area_consolidada | number: '1.2-2'}} ha</dd>
+    <dd>{{car().app_area_consolidada | number: '1.2-2'}} ha</dd>
   </dl>
   <dl>
     <dt>APP em Área de Remanescentede Vegetação Nativa</dt>
-    <dd>{{car.app_remanescente_veg_nat | number: '1.2-2'}} ha</dd>
+    <dd>{{car().app_remanescente_veg_nat | number: '1.2-2'}} ha</dd>
   </dl>
 </tui-expand>
 <header (click)="expanded.restricted = !expanded.restricted">
@@ -117,7 +117,7 @@
 <tui-expand class="data-section" [expanded]="expanded.restricted">
   <dl>
     <dt>Área de Uso Restrito</dt>
-    <dd>{{car.area_uso_restrito | number: '1.2-2'}} ha</dd>
+    <dd>{{car().area_uso_restrito | number: '1.2-2'}} ha</dd>
   </dl>
 </tui-expand>
 <header (click)="expanded.regularity = !expanded.regularity">
@@ -127,18 +127,18 @@
 <tui-expand class="data-section" [expanded]="expanded.regularity">
   <dl>
     <dt>Passivo / Excedente de Reserva Legal</dt>
-    <dd>{{car.rl_passivo_excedente | number: '1.2-2'}} ha</dd>
+    <dd>{{car().rl_passivo_excedente | number: '1.2-2'}} ha</dd>
   </dl>
   <dl>
     <dt>Área de Reserva Legal a recompor</dt>
-    <dd>{{car.rl_a_recompor | number: '1.2-2'}} ha</dd>
+    <dd>{{car().rl_a_recompor | number: '1.2-2'}} ha</dd>
   </dl>
   <dl>
     <dt>Área de Preservação Permanente a recompor</dt>
-    <dd>{{car.app_a_recompor | number: '1.2-2'}} ha</dd>
+    <dd>{{car().app_a_recompor | number: '1.2-2'}} ha</dd>
   </dl>
   <dl>
     <dt>Área de Uso Restrito a recompor</dt>
-    <dd>{{car.uso_restrito_a_recompor | number: '1.2-2'}} ha</dd>
+    <dd>{{car().uso_restrito_a_recompor | number: '1.2-2'}} ha</dd>
   </dl>
 </tui-expand>

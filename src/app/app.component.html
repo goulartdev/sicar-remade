@@ -25,9 +25,7 @@
   @let car = (selectedCAR$ | async);
 
   <div id="car-search-details-container" [class.car-selected]="car">
-    <div id="search-container">
-      <app-search-input></app-search-input>
-    </div>
+    <app-search-input></app-search-input>
     @if (car) {
     <tui-scrollbar>
       <app-car-details [car]="car" [class.car-selected]="car"

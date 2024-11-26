@@ -8,15 +8,9 @@ import {
   tuiSlideInLeft,
   tuiFadeIn,
 } from "@taiga-ui/core";
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  OnInit,
-  Renderer2,
-} from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject, OnInit } from "@angular/core";
 import { Protocol } from "pmtiles";
-import { AsyncPipe, DOCUMENT } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { ControlComponent, MapService } from "@maplibre/ngx-maplibre-gl";
 import { LngLatBoundsLike, MapGeoJSONFeature, addProtocol } from "maplibre-gl";
 import { map } from "rxjs";
@@ -54,8 +48,6 @@ addProtocol("pmtiles", protocol.tile);
   animations: [tuiSlideInRight, tuiSlideInLeft, tuiFadeIn],
 })
 export class AppComponent implements OnInit {
-  private readonly document = inject(DOCUMENT);
-  private readonly renderer = inject(Renderer2);
   private readonly mapService = inject(MapService);
   protected readonly carService = inject(CARService);
 
@@ -70,7 +62,10 @@ export class AppComponent implements OnInit {
     this.setDarkMode(this.darkMode());
 
     this.mapLoaded$.subscribe({
-      next: () => this.setupOnHoverEffects(),
+      next: () => {
+        this.mapService.mapInstance.resize();
+        this.setupOnHoverEffects();
+      },
     });
   }
 
@@ -80,12 +75,6 @@ export class AppComponent implements OnInit {
 
   protected setDarkMode(darkMode: boolean) {
     this.darkMode.set(darkMode);
-
-    if (darkMode) {
-      this.renderer.setAttribute(this.document.body, "tuiTheme", "dark");
-    } else {
-      this.renderer.removeAttribute(this.document.body, "tuiTheme");
-    }
   }
 
   /*

@@ -1,4 +1,4 @@
-<tui-root>
+<tui-root [attr.tuiTheme]="darkMode() ? 'dark' : 'light'">
   <app-map [style]="mapStyle" [fitBounds]="bounds" [attributionControl]="false">
     <mgl-control position="top-right">
       <button tuiButton size="m" (click)="layersVisible = !layersVisible">

@@ -27,9 +27,8 @@
   <div id="car-search-details-container" [class.car-selected]="car">
     <app-search-input></app-search-input>
     @if (car) {
-    <tui-scrollbar>
-      <app-car-details [car]="car" [class.car-selected]="car"
-        [@tuiFadeIn]="{value: '', params: { duration: 300}}"></app-car-details>
+    <tui-scrollbar [@tuiFadeIn]="{value: '', params: { duration: 300}}">
+      <app-car-details [car]="car" [class.car-selected]="car"></app-car-details>
     </tui-scrollbar>
     }
   </div>

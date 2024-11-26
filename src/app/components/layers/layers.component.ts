@@ -38,7 +38,7 @@ export class LayersComponent {
     const layers = this.layers;
     moveItemInArray(layers, event.previousIndex, event.currentIndex);
     const movedLayer = event.item.data;
-    const beforeLayer = layers[event.currentIndex - 1];
+    const beforeLayer = layers[event.currentIndex - 1] ?? "selected_car";
 
     this.map.moveLayer(movedLayer, beforeLayer);
   }

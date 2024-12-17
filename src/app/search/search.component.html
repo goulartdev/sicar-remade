@@ -1,16 +1,18 @@
 <form (ngSubmit)="search()">
-  <tui-textfield #searchField tuiTextfieldSize="m" [tuiTextfieldCleaner]="false">
+  <tui-textfield #searchField #dropdown="tuiDropdown" tuiTextfieldSize="m" [tuiTextfieldCleaner]="false"
+    [open]="!!results()">
     <input #searchInput id="search-input" tuiTextfield type="text" [formControl]="inputCtrl"
-      [placeholder]="searchField.focused() ? '' : 'Número do CAR'" [invalid]="inputCtrl.invalid">
+      [placeholder]="searchField.focused() ? '' : 'Número do CAR'" [invalid]="inputCtrl.invalid"
+      (focus)="dropdown.toggle(true)">
 
-    @if (isSearching()) {
+    @if (resource.isLoading()) {
     <tui-loader size="m" />
     } @else {
     <button tuiIconButton appearance="icon" size="xs" type="button" iconStart="@tui.search" (click)="search()"></button>
     }
     <button tuiIconButton appearance="icon" size="xs" type="button" iconStart="@tui.x" (click)="clear()"></button>
 
-    @if (hasResults()) {
+    @if (results()) {
     <tui-data-list *tuiTextfieldDropdown>
       <tui-opt-group>
         @for (car of results(); track car.properties.cod_imovel) {

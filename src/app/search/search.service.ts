@@ -1,11 +1,12 @@
-import { inject, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { HttpStatusCode } from "@angular/common/http";
-import { MapService } from "@maplibre/ngx-maplibre-gl";
-import { BehaviorSubject, map, Observable } from "rxjs";
+import { map, Observable } from "rxjs";
 import { LngLat, LngLatLike } from "maplibre-gl";
 
 import { CARCode, CAR } from "@core/models/car";
+export type SearchTerm = CARCode | LngLatLike;
 
+// TODO: delete this test data
 import sample from "./car_sample.json";
 
 type GeoJSONCAR = Omit<CAR, "data_inscricao" | "data_retificacao"> & {
@@ -16,13 +17,14 @@ type GeoJSONCAR = Omit<CAR, "data_inscricao" | "data_retificacao"> & {
 };
 
 @Injectable()
-export class CARService {
-  private readonly mapService = inject(MapService);
-  private readonly CAR$$ = new BehaviorSubject<CAR | null>(null);
+export class SearchService {
+  public search(term: CARCode | LngLatLike): Observable<CAR[]> {
+    return typeof term == "string"
+      ? this.find(term).pipe(map((CAR) => [CAR]))
+      : this.listAt(term);
+  }
 
-  public readonly selectedCAR$ = this.CAR$$.asObservable();
-
-  public find(code: CARCode): Observable<CAR> {
+  private find(code: CARCode): Observable<CAR> {
     const car = (sample.features as GeoJSONCAR[]).find(
       (car) => car.properties.cod_imovel === code,
     );
@@ -50,7 +52,7 @@ export class CARService {
     );
   }
 
-  public listAt(coords: LngLatLike): Observable<CAR[]> {
+  private listAt(coords: LngLatLike): Observable<CAR[]> {
     const [lng, lat] = LngLat.convert(coords).toArray();
 
     const cars = (sample.features as GeoJSONCAR[]).filter(
@@ -78,19 +80,5 @@ export class CARService {
         })),
       ),
     );
-  }
-
-  public selectCAR(car: CAR | null, navigate: boolean = true) {
-    this.CAR$$.next(car);
-
-    if (car && navigate) {
-      this.mapService.fitBounds(car.bbox, {
-        padding: { top: 100, right: 100, bottom: 100, left: 550 },
-      });
-    }
-  }
-
-  public clearSelectedCAR() {
-    this.CAR$$.next(null);
   }
 }

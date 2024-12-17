@@ -1,4 +1,4 @@
-import { BBox, Point } from "geojson";
+import { BBox, Point, Feature } from "geojson";
 import { LngLatBoundsLike } from "maplibre-gl";
 
 export type CARCode = `${string & { __brand: "\\w{2}-\\d{7}-[\\w\\d]{32}" }}`;
@@ -39,7 +39,7 @@ export interface CARData {
   uso_restrito_a_recompor: number;
 }
 
-export interface CAR {
+export interface CAR extends Feature {
   type: "Feature";
   properties: CARData;
   bbox: BBox & LngLatBoundsLike;

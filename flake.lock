@@ -1,44 +1,12 @@
 {
   "nodes": {
-    "ng-cli": {
-      "locked": {
-        "lastModified": 1724541025,
-        "narHash": "sha256-imMiv9rkG8qY0iXa8KwJWLsuPNQORIWC8HhAaUlrgI4=",
-        "owner": "goulartdev",
-        "repo": "nixpkgs",
-        "rev": "a24d768ebc70dde02ad29f7a7e8cae3a8ed111f2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "goulartdev",
-        "ref": "angular-cli",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "ng-lsp": {
-      "locked": {
-        "lastModified": 1724540362,
-        "narHash": "sha256-bcBDLfWaaYciNUccFT5X1XbPsVHPZfHyg5tsz/1XSzw=",
-        "owner": "goulartdev",
-        "repo": "nixpkgs",
-        "rev": "4d21398e4e9cb1023871192e5775d21180eaea1b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "goulartdev",
-        "ref": "angular-language-server",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1724395761,
-        "narHash": "sha256-zRkDV/nbrnp3Y8oCADf5ETl1sDrdmAW6/bBVJ8EbIdQ=",
+        "lastModified": 1733749988,
+        "narHash": "sha256-+5qdtgXceqhK5ZR1YbP1fAUsweBIrhL38726oIEAtDs=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ae815cee91b417be55d43781eb4b73ae1ecc396c",
+        "rev": "bc27f0fde01ce4e1bfec1ab122d72b7380278e68",
         "type": "github"
       },
       "original": {
@@ -50,8 +18,6 @@
     },
     "root": {
       "inputs": {
-        "ng-cli": "ng-cli",
-        "ng-lsp": "ng-lsp",
         "nixpkgs": "nixpkgs",
         "systems": "systems",
         "tippecanoe": "tippecanoe"

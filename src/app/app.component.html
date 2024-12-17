@@ -1,37 +1,35 @@
 <tui-root [attr.tuiTheme]="darkMode() ? 'dark' : 'light'">
-  <app-map [style]="mapStyle" [fitBounds]="bounds" [attributionControl]="false">
-    <mgl-control position="top-right">
-      <button tuiButton size="m" (click)="layersVisible = !layersVisible">
-        <tui-icon icon="@tui.layers-3" />
-      </button>
-    </mgl-control>
-    <mgl-control position="top-right">
-      <button tuiButton size="m" (click)="resetBounds()">
-        <tui-icon icon="@tui.expand" />
-      </button>
-    </mgl-control>
-    <mgl-control position="top-right">
-      <button tuiButton size="m" (click)="setDarkMode(!darkMode())">
-        <tui-icon [icon]="darkMode() ? '@tui.sun' : '@tui.moon'" />
-      </button>
-    </mgl-control>
-  </app-map>
+  <div appMap></div>
 
-  @if (layersVisible) {
+  @if (mapReady()) {
+  <div id="map-controls" [@tuiFadeIn]="{value: '', params: { duration: 300}}">
+    <button tuiButton size="m" (click)="toggleLayersControl()">
+      <tui-icon icon="@tui.layers-3" />
+    </button>
+    <button tuiButton size="m" (click)="resetBounds()">
+      <tui-icon icon="@tui.expand" />
+    </button>
+    <button tuiButton size="m" (click)="setDarkMode(!darkMode())">
+      <tui-icon [icon]="darkMode() ? '@tui.sun' : '@tui.moon'" />
+    </button>
+  </div>
+  }
+
+  @if (layersControlVisible()) {
   <app-layers [@tuiSlideInRight]="{value: '', params: { duration: 200}}"></app-layers>
   }
 
-  @if (mapLoaded$ | async) {
-  @let car = (selectedCAR$ | async);
+  @if (mapReady()) {
+  @let selectedCAR = CAR();
 
-  <div id="car-search-details-container" [class.car-selected]="car">
-    <app-search-input></app-search-input>
-    @if (car) {
+  <div id="car-search-details-container" [class.car-selected]="selectedCAR"
+    [@tuiFadeIn]="{value: '', params: { duration: 300}}">
+    <app-search (CAR)="setCAR($event)"></app-search>
+    @if (selectedCAR) {
     <tui-scrollbar [@tuiFadeIn]="{value: '', params: { duration: 300}}">
-      <app-car-details [car]="car" [class.car-selected]="car"></app-car-details>
+      <app-car-details [car]="selectedCAR" class="selected-car"></app-car-details>
     </tui-scrollbar>
     }
   </div>
   }
-
 </tui-root>

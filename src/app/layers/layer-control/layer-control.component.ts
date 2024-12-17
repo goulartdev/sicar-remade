@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, input } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { MapService } from "@maplibre/ngx-maplibre-gl";
+import { MapService } from "@map/map.service";
 import { TuiExpand, TuiIcon, TuiLabel, TuiTitle } from "@taiga-ui/core";
 import { TuiCheckbox, TuiChevron } from "@taiga-ui/kit";
 
@@ -40,7 +40,7 @@ export class LayerControlComponent {
   public layerId = input.required<string>();
 
   private get map() {
-    return this.mapService.mapInstance;
+    return this.mapService.map;
   }
 
   private get layer() {

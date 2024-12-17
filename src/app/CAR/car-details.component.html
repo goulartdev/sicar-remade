@@ -1,0 +1,24 @@
+<div class="wrapper">
+  @let status = car().properties.status | CARStatus;
+  <span style="--car-status-color: {{status.color}}" class="car-status-badge">Cadastro {{status.label}}</span>
+  <div class="spacer">
+  </div>
+  <button tuiButton size="s" [appearance]="section() === 'data' ? 'outline' : 'primary'" (click)="section.set('data')">
+    <tui-icon icon="@tui.list-collapse" />
+  </button>
+  <button tuiButton size="s" [appearance]="section() === 'layers' ? 'outline' : 'primary'"
+    (click)="section.set('layers')">
+    <tui-icon icon="@tui.layers-3" />
+  </button>
+  <button tuiButton size="s" [appearance]="section() === 'satellite' ? 'outline' : 'primary'"
+    (click)="section.set('satellite')">
+    <tui-icon icon="@tui.satellite" />
+  </button>
+  <button tuiButton size="s" (click)="focus()">
+    <tui-icon icon="@tui.focus" />
+  </button>
+  <button tuiButton size="s">
+    <tui-icon icon="@tui.link" (click)="copyUrl()" />
+  </button>
+</div>
+<app-car-details-data [car]="car().properties"></app-car-details-data>

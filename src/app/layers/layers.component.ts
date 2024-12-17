@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
-import { MapService } from "@maplibre/ngx-maplibre-gl";
 import {
   CdkDragDrop,
   CdkDropList,
@@ -9,6 +8,7 @@ import {
 } from "@angular/cdk/drag-drop";
 
 import { LayerControlComponent } from "./layer-control/layer-control.component";
+import { MapService } from "@map/map.service";
 
 @Component({
   selector: "app-layers",
@@ -21,7 +21,7 @@ export class LayersComponent {
   private readonly mapService = inject(MapService);
 
   private get map() {
-    return this.mapService.mapInstance;
+    return this.mapService.map;
   }
 
   protected get layers(): string[] {

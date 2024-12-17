@@ -29,9 +29,9 @@
       "@core/*": [
         "src/app/core/*"
       ],
-      "@services/*": [
-        "src/app/services/*"
-      ]
+      "@map/*": [
+        "src/app/map/*"
+      ],
     }
   },
   "angularCompilerOptions": {

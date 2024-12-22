@@ -97,6 +97,18 @@ const style: StyleSpecification = {
       },
     },
     {
+      id: "administrative_fill",
+      source: "administrative",
+      "source-layer": "administrative",
+      type: "fill",
+      paint: {
+        "fill-opacity": 0,
+      },
+      layout: {
+        visibility: "visible",
+      },
+    },
+    {
       id: "administrative",
       source: "administrative",
       "source-layer": "administrative",

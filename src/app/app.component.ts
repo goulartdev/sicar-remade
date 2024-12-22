@@ -15,11 +15,11 @@ import {
   computed,
   inject,
   OnInit,
+  signal,
 } from "@angular/core";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { Protocol } from "pmtiles";
-import { addProtocol, MapMouseEvent } from "maplibre-gl";
-import { fromEvent, switchMap } from "rxjs";
+import { addProtocol } from "maplibre-gl";
 
 import mapStyle from "./core/map-style";
 import { CARDetailsComponent } from "./CAR";
@@ -56,7 +56,7 @@ addProtocol("pmtiles", protocol.tile);
         bounds: [-74.404622, -34.796086, -33.437108, 6.672897],
       },
     },
-    { provide: TUI_ALERT_POSITION, useValue: "8px 60px 0 auto" },
+    { provide: TUI_ALERT_POSITION, useValue: "8px 64px 0 auto" },
     AppService,
     MapService,
     SearchService,
@@ -66,7 +66,6 @@ addProtocol("pmtiles", protocol.tile);
 export class AppComponent implements OnInit {
   private readonly appService = inject(AppService);
   private readonly mapService = inject(MapService);
-  private readonly searchService = inject(SearchService);
 
   protected readonly darkMode = inject(TUI_DARK_MODE);
   protected readonly mapReady = toSignal(this.mapService.mapReady$);
@@ -79,9 +78,9 @@ export class AppComponent implements OnInit {
   );
 
   protected readonly CAR = this.appService.CAR;
+  protected readonly adminUnit = signal<string | null>(null);
 
   protected setCAR(car: CAR | null) {
-    console.log(car);
     if (car) {
       this.appService.setCAR(car);
     } else {
@@ -91,6 +90,25 @@ export class AppComponent implements OnInit {
 
   public ngOnInit() {
     this.setDarkMode(this.darkMode());
+
+    this.mapService.mapReady$.subscribe(() => {
+      this.mapService.map.on("mousemove", "administrative_fill", (e) => {
+        const feature = e.features?.[0] ?? null;
+
+        if (feature) {
+          const props = feature.properties;
+          this.adminUnit.set(
+            props["NM_UF"] ?? `${props["NM_MUN"]} - ${props["SIGLA_UF"]}`,
+          );
+        } else {
+          this.adminUnit.set(null);
+        }
+      });
+
+      this.mapService.map.on("mouseleave", "administrative_fill", () => {
+        this.adminUnit.set(null);
+      });
+    });
   }
 
   protected toggleLayersControl() {

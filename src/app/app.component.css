@@ -15,18 +15,18 @@ div[appMap] {
 
 #map-controls {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 10px;
+  right: 10px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   z-index: 20;
 }
 
 app-layers {
   position: absolute;
-  top: 8px;
-  right: 62px;
+  top: 10px;
+  right: 64px;
   width: 400px;
   z-index: 19;
 }
@@ -56,4 +56,19 @@ app-layers {
     margin-top: 0;
     background-color: transparent;
   }
+}
+
+.admin-unit-label {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  margin-inline: auto;
+  width: fit-content;
+
+  font-weight: bold;
+  font-size: 14px;
+  color: white;
+  background-color: #d3650a;
+  padding: 2px 6px;
+  border-radius: var(--tui-radius-xs);
 }

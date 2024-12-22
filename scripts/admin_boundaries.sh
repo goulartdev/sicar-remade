@@ -23,7 +23,7 @@
     rm "${uf_output}.pmtiles"
   fi
 
-  tippecanoe -z5 -o "$uf_output.pmtiles" --hilbert --include "NM_UF" -l "administrative" "$uf_output.geojson"
+  tippecanoe -z5 -o "$uf_output.pmtiles" --hilbert --include "NM_UF" --generate-ids -l "administrative" "$uf_output.geojson"
   rm "$uf_output.geojson"
 
 
@@ -43,7 +43,7 @@
     rm "${mun_output}.pmtiles"
   fi
 
-  tippecanoe -zg -Z6 -o "$mun_output.pmtiles" --hilbert --include "NM_MUN" -l "administrative" "$mun_output.geojson"
+  tippecanoe -zg -Z6 -o "$mun_output.pmtiles" --hilbert --include "NM_MUN" --include "SIGLA_UF" --generate-ids -l "administrative" "$mun_output.geojson"
   rm "$mun_output.geojson"
 
   admin_output="$output_path/administrative.pmtiles"

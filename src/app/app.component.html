@@ -31,5 +31,11 @@
     </tui-scrollbar>
     }
   </div>
+
+  @if (adminUnit()) {
+  <span class="admin-unit-label">
+    {{adminUnit()}}
+  </span>
+  }
   }
 </tui-root>

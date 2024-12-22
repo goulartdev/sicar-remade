@@ -1,3 +1,17 @@
+:root,
+[tuiTheme=light] {
+  --tui-background-accent-1: #036c3e;
+  --tui-background-accent-1-hover: #1d844d;
+  --tui-background-accent-1-pressed: #24947f;
+  --tui-text-action: #036c3e;
+  --tui-text-action-hover: #1d844d;
+}
+
+[tuiTheme=dark] {
+  --tui-text-action: #18866a;
+  --tui-text-action-hover: #036c3e;
+}
+
 body {
   margin: 0;
   font: var(--tui-font-text-s);

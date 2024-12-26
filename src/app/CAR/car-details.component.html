@@ -1,5 +1,5 @@
 <div class="wrapper">
-  @let status = car().properties.status | CARStatus;
+  @let status = car().properties.ind_status | CARStatus;
   <span style="--car-status-color: {{status.color}}" class="car-status-badge">Cadastro {{status.label}}</span>
   <div class="spacer">
   </div>
@@ -10,10 +10,10 @@
     (click)="section.set('layers')">
     <tui-icon icon="@tui.layers-3" />
   </button>
-  <button tuiButton size="s" [appearance]="section() === 'satellite' ? 'outline' : 'primary'"
-    (click)="section.set('satellite')">
-    <tui-icon icon="@tui.satellite" />
-  </button>
+  <!--<button tuiButton size="s" [appearance]="section() === 'satellite' ? 'outline' : 'primary'"-->
+  <!--  (click)="section.set('satellite')">-->
+  <!--  <tui-icon icon="@tui.satellite" />-->
+  <!--</button>-->
   <button tuiButton size="s" (click)="focus()">
     <tui-icon icon="@tui.focus" />
   </button>
@@ -21,4 +21,13 @@
     <tui-icon icon="@tui.link" (click)="copyUrl()" />
   </button>
 </div>
+@switch (section()) {
+@case('data') {
 <app-car-details-data [car]="car().properties"></app-car-details-data>
+}
+@case('layers') {
+}
+<!--@case('satellite') {-->
+<!--<app-stac-search [bbox]="car().bbox"></app-stac-search>-->
+<!--}-->
+}

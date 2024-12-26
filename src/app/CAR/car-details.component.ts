@@ -12,9 +12,10 @@ import { TuiAlertService, TuiButton, TuiIcon } from "@taiga-ui/core";
 import { GeoJSONSource } from "maplibre-gl";
 
 import { CAR } from "@core/models/car";
-import { CARDetailsDataComponent } from "./car-details-data/car-details-data.component";
 import { CARStatusPipe } from "@core/pipes/car-status.pipe";
 import { MapService } from "@map/map.service";
+
+import { CARDetailsDataComponent } from "./car-details-data/car-details-data.component";
 
 @Component({
   selector: "app-car-details",

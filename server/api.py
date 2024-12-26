@@ -1,6 +1,6 @@
 import json
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import duckdb
 
@@ -15,6 +15,17 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+datasets = [
+    "apps",
+    "area_consolidada",
+    "area_pousio",
+    "hidrografia",
+    "reserva_legal",
+    "Servidao_administrativa",
+    "uso_restrito",
+    "vegetacao_nativa",
+]
 
 
 @app.get("/imoveis")
@@ -88,6 +99,9 @@ async def get_area_imovel_details(cod_imovel: str):
         ["./data/area_imovel/**/*.parquet", uf, cod_imovel],
     ).fetchall()
 
+    if not results:
+        raise HTTPException(status_code=404)
+
     row = results[0]
 
     return {
@@ -114,6 +128,9 @@ async def get_area_imovel_details(cod_imovel: str):
 
 @app.get("/imoveis/{cod_imovel}/{dataset}")
 async def get_details(cod_imovel: str, dataset: str):
+    if dataset not in datasets:
+        raise HTTPException(status_code=404)
+
     con = duckdb.connect()
     con.install_extension("spatial")
     con.load_extension("spatial")

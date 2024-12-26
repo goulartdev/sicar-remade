@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+duckdb = "*"
+fastapi = {extras = ["standard"], version = "*"}
+
+[dev-packages]
+ruff = "*"
+basedpyright = "*"
+fastapi = "*"
+
+[requires]
+python_version = "3.13"
+python_full_version = "3.13.1"
+
+[scripts]
+start = "fastapi dev api.py"

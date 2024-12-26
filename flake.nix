@@ -33,10 +33,15 @@
                 angular-language-server
                 minio
                 duckdb
+                python313
+                pipenv
+                fastapi-cli
               ])
               ++ [
                 tippecanoe.legacyPackages.${system}.tippecanoe
               ];
+
+            LD_LIBRARY_PATH = nixpkgs.lib.makeLibraryPath [ pkgs.stdenv.cc.cc.lib ];
           };
         }
       );

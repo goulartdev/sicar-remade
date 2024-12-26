@@ -3,7 +3,7 @@ import { inject, Injectable, signal, WritableSignal } from "@angular/core";
 import { CAR } from "@core/models/car";
 import { MapService } from "@map/map.service";
 
-type Widget = "layers_control" | "stac_search";
+type Widget = "layers_control";
 
 interface AppState {
   CAR: WritableSignal<CAR | null>;

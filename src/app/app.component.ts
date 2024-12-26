@@ -56,7 +56,7 @@ addProtocol("pmtiles", protocol.tile);
         bounds: [-74.404622, -34.796086, -33.437108, 6.672897],
       },
     },
-    { provide: TUI_ALERT_POSITION, useValue: "8px 64px 0 auto" },
+    { provide: TUI_ALERT_POSITION, useValue: "8px auto 0 8px" },
     AppService,
     MapService,
     SearchService,
@@ -72,9 +72,6 @@ export class AppComponent implements OnInit {
 
   protected readonly layersControlVisible = computed(() =>
     this.appService.widgets().includes("layers_control"),
-  );
-  protected readonly STACSearchVisible = computed(() =>
-    this.appService.widgets().includes("stac_search"),
   );
 
   protected readonly CAR = this.appService.CAR;

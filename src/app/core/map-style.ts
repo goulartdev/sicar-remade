@@ -27,7 +27,7 @@ const style: StyleSpecification = {
     },
     area_imovel: {
       type: "vector",
-      url: "pmtiles://http://localhost:9000/sicar/AREA_IMOVEL_2.pmtiles",
+      url: "pmtiles://http://localhost:9000/sicar/AREA_IMOVEL.pmtiles",
     },
     administrative: {
       type: "vector",

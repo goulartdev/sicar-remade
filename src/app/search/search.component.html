@@ -16,8 +16,8 @@
     <tui-data-list *tuiTextfieldDropdown>
       <tui-opt-group>
         @for (car of results(); track car.properties.cod_imovel) {
-        @let status = car.properties.status | CARStatus;
-        <button tuiOption type="button" (click)="select(car)" (mouseenter)="updateHighlight(car)"
+        @let status = car.properties.ind_status | CARStatus;
+        <button tuiOption type="button" (click)="select(car.properties.cod_imovel)" (mouseenter)="updateHighlight(car)"
           (mouseleave)="updateHighlight({ type: 'FeatureCollection', features: [] })">
           <span style="--car-status-color: {{status.color}}" class="car-status-badge">{{status.label}}</span>
           <span class="car-number">{{car.properties.cod_imovel}}</span>

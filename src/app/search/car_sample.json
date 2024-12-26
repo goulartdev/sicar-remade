@@ -687,7 +687,7 @@
       "properties": {
         "cod_imovel": "MT-5108352-5A987DF81C0545CFBA7A197B8662624A",
         "mod_fiscal": 8.16,
-        "status": "CA",
+        "status": "AT",
         "tipo": "IRU",
         "condicao": "Em análise",
         "area": 816.4057,
@@ -760,7 +760,7 @@
       "properties": {
         "cod_imovel": "MT-5101704-220410838B0C42758E51D456DA3C9700",
         "mod_fiscal": 44.59,
-        "status": "CA",
+        "status": "AT",
         "tipo": "IRU",
         "condicao": "Em análise",
         "area": 4459.1743,
@@ -907,7 +907,7 @@
       "properties": {
         "cod_imovel": "MT-5108352-BBC2C360FEE741FE969F00648D529658",
         "mod_fiscal": 20.14,
-        "status": "CA",
+        "status": "AT",
         "tipo": "IRU",
         "condicao": "Em análise",
         "area": 2014.2427,
@@ -1003,7 +1003,7 @@
       "properties": {
         "cod_imovel": "MT-5108352-E2DBD240DBFC461DAD6A1B50A6DBA49B",
         "mod_fiscal": 150.9,
-        "status": "CA",
+        "status": "AT",
         "tipo": "IRU",
         "condicao": "Aguardando análise",
         "area": 15089.6248,

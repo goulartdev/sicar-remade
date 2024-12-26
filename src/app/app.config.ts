@@ -8,6 +8,7 @@ import {
 import { provideRouter } from "@angular/router";
 
 import { routes } from "./app.routes";
+import { provideHttpClient } from "@angular/common/http";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,6 +16,7 @@ export const appConfig: ApplicationConfig = {
     //provideExperimentalZonelessChangeDetection(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    provideHttpClient(),
     NG_EVENT_PLUGINS,
   ],
 };

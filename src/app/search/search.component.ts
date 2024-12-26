@@ -91,23 +91,26 @@ export class SearchComponent implements OnInit {
   });
 
   protected readonly results = computed(() => {
-    const results = this.resource.value() ?? [];
-    return results.length > 1 ? results : null;
+    const result = this.resource.value();
+    return Array.isArray(result) ? result : null;
   });
 
   protected readonly selected = linkedSignal(() => {
-    const results = this.resource.value() ?? [];
-    return results.length === 1 ? results[0] : null;
+    const result = this.resource.value() ?? [];
+    return Array.isArray(result) ? null : result;
   });
 
   private readonly effectRef = afterRenderEffect(() => {
     const results = this.results();
+    const selected = this.selected();
 
-    if (results) {
+    if (results && !selected) {
       this.dropdown()?.toggle(true);
       this.input()?.nativeElement.focus();
       this.mapService.fitFeatures(results, { padding: 100 });
     }
+
+    this.updateSearchParam(selected?.properties.cod_imovel ?? null);
   });
 
   public CAR = outputFromObservable<CAR | null>(toObservable(this.selected));
@@ -139,14 +142,11 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  protected select(car: CAR) {
-    this.updateSearchParam(car.properties.cod_imovel);
-    this.resource.set(null);
-    this.selected.set(car);
+  protected select(code: CARCode) {
+    this.searchValue.set(code);
   }
 
   protected clear() {
-    this.inputCtrl.setValue("");
     this.searchValue.set(null);
   }
 
@@ -155,12 +155,12 @@ export class SearchComponent implements OnInit {
     source.setData(data);
   }
 
-  private updateSearchParam(value: CARCode) {
-    this.inputCtrl.patchValue(value);
+  private updateSearchParam(value: CARCode | null) {
+    this.inputCtrl.patchValue(value ?? "");
 
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: { search: value },
+      queryParams: value ? { search: value } : {},
       onSameUrlNavigation: "ignore",
       replaceUrl: true,
     });

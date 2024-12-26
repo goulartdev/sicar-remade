@@ -32,9 +32,9 @@
   )
 
   datasets=(
-    # "AREA_IMOVEL"
-    # "APPS"
-    # "VEGETACAO_NATIVA"
+    "AREA_IMOVEL"
+    "APPS"
+    "VEGETACAO_NATIVA"
     "AREA_CONSOLIDADA"
     "AREA_POUSIO"
     "HIDROGRAFIA"
@@ -43,13 +43,9 @@
     "RESERVA_LEGAL"
   )
 
-  # obs: às vezes a conexão com o site é perdida e o download trava.
-  # Isso parece acontecer mesmo baixando direto pelo sicar.
-  # Se você perceber que o download travou, pare a execução do script e tente novamente
-
   cookies="./cookies"
-  opts=(-L -c "$cookies" -b "$cookies" --fail-with-body)
-  output_path='./data'
+  opts=(-Lk -c "$cookies" -b "$cookies" --fail-with-body)
+  output_path='./data/raw'
 
   curl $opts -s -o /dev/null -X GET 'https://consultapublica.car.gov.br/publico/imoveis/index'
 

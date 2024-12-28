@@ -46,6 +46,10 @@ export class MapService {
     });
   }
 
+  public getLayers() {
+    return this.map.getStyle().layers;
+  }
+
   public updateViewPadding(padding: Partial<PaddingOptions>) {
     this.viewPadding = { ...this.viewPadding, ...padding };
   }

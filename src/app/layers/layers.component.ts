@@ -12,14 +12,8 @@ import { MapService, SortableLayersComponent, LayerControlComponent } from "@map
 })
 export class LayersComponent {
   private readonly mapService = inject(MapService);
-
-  protected get layers(): string[] {
-    return this.mapService.map
-      .getStyle()
-      .layers.filter(
-        (layer) => (layer.metadata as Record<string, any> | undefined)?.["legend"],
-      )
-      .map((layer) => layer.id)
-      .reverse();
-  }
+  protected readonly layers = this.mapService
+    .getLayers()
+    .filter((layer) => (layer.metadata as Record<string, any> | undefined)?.["legend"])
+    .map((layer) => layer.id);
 }

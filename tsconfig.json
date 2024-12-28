@@ -29,8 +29,14 @@
       "@core/*": [
         "src/app/core/*"
       ],
+      "@core": [
+        "src/app/core"
+      ],
       "@map/*": [
         "src/app/map/*"
+      ],
+      "@map": [
+        "src/app/map"
       ],
     }
   },

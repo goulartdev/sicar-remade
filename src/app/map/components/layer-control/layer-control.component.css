@@ -11,10 +11,6 @@
   align-items: center;
   gap: 4px;
 
-  .handle {
-    cursor: move;
-  }
-
   label {
     flex-grow: 1;
     align-items: center;

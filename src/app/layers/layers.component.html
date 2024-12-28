@@ -1,8 +1,8 @@
-<div class="layers" cdkDropList (cdkDropListDropped)="moveLayer($event)">
-  @for (layer of layers; track layer) {
-  <div class="drag-container" cdkDrag [cdkDragData]="layer" cdkDragPreviewContainer="parent">
-    <div class="drag-placeholder" *cdkDragPlaceholder></div>
-    <app-layer-control [layerId]="layer" />
-  </div>
-  }
-</div>
+<app-sortable-layers [layers]="layers">
+  <ng-template let-layer>
+    <app-layer-control [layerId]="layer">
+      <!--<tui-icon class="info" icon="@tui.info"></tui-icon>-->
+      <tui-icon class="handle" icon="@tui.grip-vertical"></tui-icon>
+    </app-layer-control>
+  </ng-template>
+</app-sortable-layers>

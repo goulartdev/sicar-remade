@@ -1,18 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
-import {
-  CdkDragDrop,
-  CdkDropList,
-  CdkDrag,
-  CdkDragPlaceholder,
-  moveItemInArray,
-} from "@angular/cdk/drag-drop";
+import { TuiIcon } from "@taiga-ui/core";
 
-import { LayerControlComponent } from "./layer-control/layer-control.component";
-import { MapService } from "@map/map.service";
+import { MapService, SortableLayersComponent, LayerControlComponent } from "@map";
 
 @Component({
   selector: "app-layers",
-  imports: [CdkDropList, CdkDrag, CdkDragPlaceholder, LayerControlComponent],
+  imports: [TuiIcon, LayerControlComponent, SortableLayersComponent],
   templateUrl: "./layers.component.html",
   styleUrl: "./layers.component.css",
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,26 +13,13 @@ import { MapService } from "@map/map.service";
 export class LayersComponent {
   private readonly mapService = inject(MapService);
 
-  private get map() {
-    return this.mapService.map;
-  }
-
   protected get layers(): string[] {
-    return this.map
+    return this.mapService.map
       .getStyle()
       .layers.filter(
         (layer) => (layer.metadata as Record<string, any> | undefined)?.["legend"],
       )
       .map((layer) => layer.id)
       .reverse();
-  }
-
-  protected moveLayer(event: CdkDragDrop<string[], string>) {
-    const layers = this.layers;
-    moveItemInArray(layers, event.previousIndex, event.currentIndex);
-    const movedLayer = event.item.data;
-    const beforeLayer = layers[event.currentIndex - 1] ?? "selected_car";
-
-    this.map.moveLayer(movedLayer, beforeLayer);
   }
 }

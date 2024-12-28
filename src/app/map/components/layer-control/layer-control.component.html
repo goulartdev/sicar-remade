@@ -8,8 +8,8 @@
     <input tuiCheckbox type="checkbox" size="s" style="--t-bg: {{legend.color ?? '#666'}}" [(ngModel)]="visible">
     <span tuiTitle>{{legend.label}}</span>
   </label>
-  <tui-icon class="download" icon="@tui.info"></tui-icon>
-  <tui-icon class="handle" icon="@tui.grip-vertical"></tui-icon>
+  <ng-content>
+  </ng-content>
 </div>
 <tui-expand class="categories" [expanded]="expanded">
   <ul>

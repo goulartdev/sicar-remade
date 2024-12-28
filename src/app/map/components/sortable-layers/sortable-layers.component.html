@@ -1,0 +1,9 @@
+<div class="layers" cdkDropList (cdkDropListDropped)="moveLayer($event)">
+  @for (layer of layers(); track layer) {
+  <div class="drag-container" cdkDrag [cdkDragData]="layer" cdkDragPreviewContainer="parent">
+    <div class="drag-placeholder" *cdkDragPlaceholder></div>
+    <ng-template [ngTemplateOutlet]="layersTemplate() ?? null"
+      [ngTemplateOutletContext]="{ $implicit: layer }"></ng-template>
+  </div>
+  }
+</div>

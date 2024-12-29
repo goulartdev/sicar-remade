@@ -34,7 +34,7 @@
                 minio
                 duckdb
                 python313
-                pipenv
+                uv
                 fastapi-cli
               ])
               ++ [
